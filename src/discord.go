@@ -41,9 +41,9 @@ type ValorantStats struct {
 
 func main() {
 
-	nametag := "fompei-na1"
+	nametag := "bad-nametag"
 	json := retrieveBlitzData(nametag)
-	playerStats := parseValorantData(json)
+	playerStats := parseValorantData(nametag, json)
 	hitRateData := calculateHitPercentages(playerStats)
 	postStatsToDiscord(nametag, hitRateData)
 	fmt.Println(hitRateData)
@@ -67,10 +67,11 @@ func retrieveBlitzData(nametag string) []byte {
 	
 }
 
-func parseValorantData(blitzJson []byte) ValorantStats {
+func parseValorantData(nametag string, blitzJson []byte) ValorantStats {
 	var valorantStats ValorantStats 
 	err := json.Unmarshal(blitzJson, &valorantStats)
 	if err != nil {
+		postError(nametag)
 		log.Fatalln(err)
 	}
 	return valorantStats
@@ -94,10 +95,34 @@ func roundPercentage(percentage float64) float64 {
 	return math.Round(percentage * 100) / 100
 }
 
+func postError(nametag string) {
+	content := fmt.Sprintf("Could not retrieve data for %s", nametag)
+	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
+	discordMessage := map[string]interface{} {
+		"content": content,
+	}
+	
+	bytesRepresentation, err := json.Marshal(discordMessage)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	resp, err := http.Post(discordWebhook, "application/json", bytes.NewBuffer(bytesRepresentation))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var result map[string]interface{}
+	json.NewDecoder(resp.Body).Decode(&result)
+
+	log.Println(result)
+	log.Println(result["data"])
+}
+
 func postStatsToDiscord(nametag string, hitRate HitPercentages) {
 	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
 	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
-	legShots := fmt.Sprintf(":foot: Leg shot percentage (foot fetish): %.2f%%\n", hitRate.LegShotPercentage)
+	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
 	content := fmt.Sprintf("Career Stats for %s:\n%s %s %s", nametag, headShots, bodyShots, legShots)
 
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
