@@ -1,18 +1,55 @@
 package main 
 
 import (
+	"io/ioutil"
 	"log"
 	"net/http"
 	"encoding/json"
 	"bytes"
 	"fmt"
+	"math"
+	"github.com/dariubs/percent"
 )
 
-func main() {
-	retrieveBlitzData("fompei-na1")
+type HitPercentages struct {
+	HeadShotPercentage float64
+	BodyShotPercentage float64
+	LegShotPercentage float64
 }
 
-func retrieveBlitzData(nametag string) string {
+type DamageStats struct {
+	BodyShots int
+	HeadShots int
+	LegShots  int
+	Damage    int
+}
+type Career struct {
+	DamageStats DamageStats
+}
+type Overall struct {
+	Career Career
+}
+type Stats struct {
+	Overall Overall
+}
+type ValorantStats struct {
+	Nametag string
+	Id string
+	Stats Stats
+}
+
+
+func main() {
+
+	nametag := "fompei-na1"
+	json := retrieveBlitzData(nametag)
+	playerStats := parseValorantData(json)
+	hitRateData := calculateHitPercentages(playerStats)
+	postStatsToDiscord(nametag, hitRateData)
+	fmt.Println(hitRateData)
+}
+
+func retrieveBlitzData(nametag string) []byte {
 	blitzEndpoint := fmt.Sprintf("https://valorant.iesdev.com/player/%s", nametag)
 	resp, err := http.Get(blitzEndpoint)
 	if err != nil {
@@ -21,36 +58,51 @@ func retrieveBlitzData(nametag string) string {
 
 	defer resp.Body.Close()
 
-	type DamageStats struct {
-		bodyShots int
-		headShots int
-		legShots int
-		damage int
-	}
-	type Career struct {
-		damageStats DamageStats
-	}
-	type Overall struct {
-		career Career
-	}
-	type Stats struct {
-		overall Overall
-	}
-	type ValorantStats struct {
-		stats Stats
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
 	}
 
-	var result map[string]interface{}
-
-	json.NewDecoder(resp.Body).Decode(&result)
-	log.Println(result)
-	return ""
+	return body
+	
 }
 
-func postStatsToDiscord() {
+func parseValorantData(blitzJson []byte) ValorantStats {
+	var valorantStats ValorantStats 
+	err := json.Unmarshal(blitzJson, &valorantStats)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return valorantStats
+}
+
+func calculateHitPercentages(valorantStats ValorantStats) HitPercentages {
+	headShots := valorantStats.Stats.Overall.Career.DamageStats.HeadShots
+	bodyShots := valorantStats.Stats.Overall.Career.DamageStats.BodyShots
+	legShots  := valorantStats.Stats.Overall.Career.DamageStats.LegShots
+
+	var hitPercentages HitPercentages
+	totalShots := headShots + bodyShots + legShots
+	hitPercentages.HeadShotPercentage = roundPercentage(percent.PercentOf(headShots, totalShots))
+	hitPercentages.BodyShotPercentage = roundPercentage(percent.PercentOf(bodyShots, totalShots))
+	hitPercentages.LegShotPercentage  = roundPercentage(percent.PercentOf(legShots, totalShots))
+
+	return hitPercentages
+}
+
+func roundPercentage(percentage float64) float64 {
+	return math.Round(percentage * 100) / 100
+}
+
+func postStatsToDiscord(nametag string, hitRate HitPercentages) {
+	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
+	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
+	legShots := fmt.Sprintf(":foot: Leg shot percentage (foot fetish): %.2f%%\n", hitRate.LegShotPercentage)
+	content := fmt.Sprintf("Career Stats for %s:\n%s %s %s", nametag, headShots, bodyShots, legShots)
+
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
 	discordMessage := map[string]interface{} {
-		"content": "Valorant discord post",
+		"content": content,
 	}
 
 	bytesRepresentation, err := json.Marshal(discordMessage)
