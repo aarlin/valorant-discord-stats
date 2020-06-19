@@ -96,7 +96,7 @@ func roundPercentage(percentage float64) float64 {
 }
 
 func postError(nametag string) {
-	content := fmt.Sprintf("Could not retrieve data for %s", nametag)
+	content := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", nametag)
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
 	discordMessage := map[string]interface{} {
 		"content": content,
