@@ -1,0 +1,2191 @@
+{
+    "id": "8f125184-2ad1-54f2-9072-318ad23c0213",
+    "name": "Fompei",
+    "tag": "NA1",
+    "nametag": "fompei-na1",
+    "profileIconId": "1597",
+    "ranks": {
+        "seeding": {
+            "tier": 0
+        },
+        "unrated": {
+            "tier": 0
+        },
+        "competitive": {
+            "tier": 0
+        }
+    },
+    "user": true,
+    "updatedAt": "2020-06-17T05:07:56.051Z",
+    "createdAt": "2020-06-17T05:07:56.051Z",
+    "stats": {
+        "spikerush": {
+            "last20": {
+                "kills": 0,
+                "score": 0,
+                "deaths": 0,
+                "assists": 0,
+                "roundsPlayed": 0,
+                "playtimeMillis": 0,
+                "wins": 0,
+                "roundsWon": 0,
+                "matches": 0,
+                "damageStats": {
+                    "damage": 0,
+                    "headshots": 0,
+                    "bodyshots": 0,
+                    "legshots": 0
+                },
+                "weaponStats": {},
+                "weaponDamageStats": {},
+                "economy": 0,
+                "abilityCasts": {
+                    "grenadeCasts": 0,
+                    "ability1Casts": 0,
+                    "ability2Casts": 0,
+                    "ultimateCasts": 0
+                },
+                "plants": 0,
+                "defuses": 0,
+                "firstBloodsTaken": 0,
+                "firstBloodsGiven": 0,
+                "roundsWonWhenFirstBloodTaken": 0,
+                "roundsLostWhenFirstBloodGiven": 0,
+                "lastKills": 0,
+                "agentsStats": {},
+                "mapStats": {}
+            },
+            "career": {
+                "kills": 0,
+                "score": 0,
+                "deaths": 0,
+                "assists": 0,
+                "roundsPlayed": 0,
+                "playtimeMillis": 0,
+                "wins": 0,
+                "roundsWon": 0,
+                "matches": 0,
+                "damageStats": {
+                    "damage": 0,
+                    "headshots": 0,
+                    "bodyshots": 0,
+                    "legshots": 0
+                },
+                "weaponStats": {},
+                "weaponDamageStats": {},
+                "economy": 0,
+                "abilityCasts": {
+                    "grenadeCasts": 0,
+                    "ability1Casts": 0,
+                    "ability2Casts": 0,
+                    "ultimateCasts": 0
+                },
+                "plants": 0,
+                "defuses": 0,
+                "firstBloodsTaken": 0,
+                "firstBloodsGiven": 0,
+                "roundsWonWhenFirstBloodTaken": 0,
+                "roundsLostWhenFirstBloodGiven": 0,
+                "lastKills": 0,
+                "agentsStats": {},
+                "mapStats": {}
+            }
+        },
+        "unrated": {
+            "last20": {
+                "kills": 120,
+                "score": 33777,
+                "deaths": 105,
+                "assists": 54,
+                "roundsPlayed": 149,
+                "playtimeMillis": 16179998,
+                "wins": 3,
+                "roundsWon": 72,
+                "matches": 7,
+                "damageStats": {
+                    "damage": 21109,
+                    "headshots": 50,
+                    "bodyshots": 410,
+                    "legshots": 104
+                },
+                "weaponStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalRange": 25210.448750685217
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalRange": 4790.138071257407
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 22,
+                        "totalRange": 23963.400288730176
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                        "kills": 5,
+                        "totalRange": 16778.976738540972
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalRange": 8556.96492986932
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                        "kills": 3,
+                        "totalRange": 9846.97827303671
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalRange": 712.523683816896
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 31,
+                        "totalRange": 49391.11953043858
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 34,
+                        "totalRange": 54890.62809536471
+                    }
+                },
+                "weaponDamageStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalKillRange": 25210.448750685217,
+                        "altFireKills": 0,
+                        "headshots": 4,
+                        "bodyshots": 68,
+                        "legshots": 16,
+                        "damage": 2379,
+                        "roundsUsed": 34
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalKillRange": 4790.138071257407,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 24,
+                        "legshots": 5,
+                        "damage": 817,
+                        "roundsUsed": 8
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 27,
+                        "totalKillRange": 40742.37702727115,
+                        "altFireKills": 10,
+                        "headshots": 14,
+                        "bodyshots": 88,
+                        "legshots": 17,
+                        "damage": 5085,
+                        "roundsUsed": 43
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalKillRange": 8556.96492986932,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 1,
+                        "legshots": 0,
+                        "damage": 360,
+                        "roundsUsed": 2
+                    },
+                    "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 9,
+                        "legshots": 3,
+                        "damage": 161,
+                        "roundsUsed": 2
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalKillRange": 712.523683816896,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 5,
+                        "legshots": 1,
+                        "damage": 169,
+                        "roundsUsed": 4
+                    },
+                    "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 3,
+                        "legshots": 1,
+                        "damage": 109,
+                        "roundsUsed": 3
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 30,
+                        "totalKillRange": 50325.40838245618,
+                        "altFireKills": 0,
+                        "headshots": 13,
+                        "bodyshots": 126,
+                        "legshots": 30,
+                        "damage": 4637,
+                        "roundsUsed": 46
+                    },
+                    "910BE174-449B-C412-AB22-D0873436B21B": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 8,
+                        "legshots": 2,
+                        "damage": 232,
+                        "roundsUsed": 3
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 28,
+                        "totalKillRange": 49441.21283245088,
+                        "altFireKills": 4,
+                        "headshots": 16,
+                        "bodyshots": 72,
+                        "legshots": 27,
+                        "damage": 5401,
+                        "roundsUsed": 44
+                    },
+                    "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 6,
+                        "legshots": 2,
+                        "damage": 85,
+                        "roundsUsed": 1
+                    }
+                },
+                "economy": 475100,
+                "abilityCasts": {
+                    "grenadeCasts": 89,
+                    "ability1Casts": 118,
+                    "ability2Casts": 101,
+                    "ultimateCasts": 23
+                },
+                "plants": 14,
+                "defuses": 2,
+                "firstBloodsTaken": 6,
+                "firstBloodsGiven": 4,
+                "roundsWonWhenFirstBloodTaken": 3,
+                "roundsLostWhenFirstBloodGiven": 4,
+                "lastKills": 18,
+                "agentsStats": {
+                    "707eab51-4836-f488-046a-cda6bf494859": {
+                        "kills": 51,
+                        "score": 16281,
+                        "deaths": 68,
+                        "assists": 20,
+                        "roundsPlayed": 88,
+                        "playtimeMillis": 9655248,
+                        "wins": 1,
+                        "roundsWon": 37,
+                        "matches": 4,
+                        "damageStats": {
+                            "damage": 10504,
+                            "headshots": 22,
+                            "bodyshots": 199,
+                            "legshots": 59
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalRange": 7516.795615361629
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalRange": 2064.9717330720487
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 22,
+                                "totalRange": 23963.400288730176
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                                "kills": 5,
+                                "totalRange": 16778.976738540972
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 3767.937366783052
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 1,
+                                "totalRange": 3369.5723764299823
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalRange": 712.523683816896
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 8,
+                                "totalRange": 13829.639345468007
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalRange": 10887.397471935932
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalKillRange": 7516.795615361629,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 27,
+                                "legshots": 9,
+                                "damage": 953,
+                                "roundsUsed": 16
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalKillRange": 2064.9717330720487,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 11,
+                                "legshots": 3,
+                                "damage": 401,
+                                "roundsUsed": 4
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 27,
+                                "totalKillRange": 40742.37702727115,
+                                "altFireKills": 10,
+                                "headshots": 14,
+                                "bodyshots": 88,
+                                "legshots": 17,
+                                "damage": 5085,
+                                "roundsUsed": 43
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 3767.937366783052,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 1,
+                                "legshots": 0,
+                                "damage": 105,
+                                "roundsUsed": 1
+                            },
+                            "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 9,
+                                "legshots": 3,
+                                "damage": 161,
+                                "roundsUsed": 2
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalKillRange": 712.523683816896,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 5,
+                                "legshots": 1,
+                                "damage": 169,
+                                "roundsUsed": 4
+                            },
+                            "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 3,
+                                "legshots": 1,
+                                "damage": 109,
+                                "roundsUsed": 3
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalKillRange": 10887.397471935932,
+                                "altFireKills": 0,
+                                "headshots": 2,
+                                "bodyshots": 32,
+                                "legshots": 11,
+                                "damage": 1119,
+                                "roundsUsed": 14
+                            },
+                            "910BE174-449B-C412-AB22-D0873436B21B": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 8,
+                                "legshots": 2,
+                                "damage": 232,
+                                "roundsUsed": 3
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 7,
+                                "totalKillRange": 11246.977733874262,
+                                "altFireKills": 0,
+                                "headshots": 4,
+                                "bodyshots": 15,
+                                "legshots": 12,
+                                "damage": 1495,
+                                "roundsUsed": 12
+                            }
+                        },
+                        "economy": 268400,
+                        "abilityCasts": {
+                            "grenadeCasts": 69,
+                            "ability1Casts": 80,
+                            "ability2Casts": 61,
+                            "ultimateCasts": 11
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    },
+                    "569fdd95-4d10-43ab-ca70-79becc718b46": {
+                        "kills": 69,
+                        "score": 17496,
+                        "deaths": 37,
+                        "assists": 34,
+                        "roundsPlayed": 61,
+                        "playtimeMillis": 6524750,
+                        "wins": 2,
+                        "roundsWon": 35,
+                        "matches": 3,
+                        "damageStats": {
+                            "damage": 10605,
+                            "headshots": 28,
+                            "bodyshots": 211,
+                            "legshots": 45
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalRange": 17693.653135323584
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalRange": 2725.1663381853587
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 29,
+                                "totalRange": 44003.23062342877
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 23,
+                                "totalRange": 35561.48018497056
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 4789.027563086268
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 2,
+                                "totalRange": 6477.405896606728
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalKillRange": 17693.653135323584,
+                                "altFireKills": 0,
+                                "headshots": 3,
+                                "bodyshots": 41,
+                                "legshots": 7,
+                                "damage": 1426,
+                                "roundsUsed": 18
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalKillRange": 2725.1663381853587,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 13,
+                                "legshots": 2,
+                                "damage": 416,
+                                "roundsUsed": 4
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 25,
+                                "totalKillRange": 39438.01091052024,
+                                "altFireKills": 0,
+                                "headshots": 11,
+                                "bodyshots": 94,
+                                "legshots": 19,
+                                "damage": 3518,
+                                "roundsUsed": 32
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 21,
+                                "totalKillRange": 38194.23509857662,
+                                "altFireKills": 4,
+                                "headshots": 12,
+                                "bodyshots": 57,
+                                "legshots": 15,
+                                "damage": 3906,
+                                "roundsUsed": 32
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 4789.027563086268,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 0,
+                                "legshots": 0,
+                                "damage": 255,
+                                "roundsUsed": 1
+                            },
+                            "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 6,
+                                "legshots": 2,
+                                "damage": 85,
+                                "roundsUsed": 1
+                            }
+                        },
+                        "economy": 206700,
+                        "abilityCasts": {
+                            "grenadeCasts": 20,
+                            "ability1Casts": 38,
+                            "ability2Casts": 40,
+                            "ultimateCasts": 12
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    }
+                },
+                "mapStats": {
+                    "bind": {
+                        "wins": 1,
+                        "matches": 2,
+                        "roundsWon": 23,
+                        "roundsPlayed": 48,
+                        "attackingWon": 16,
+                        "attackingPlayed": 23,
+                        "defendingWon": 7,
+                        "defendingPlayed": 25
+                    },
+                    "ascent": {
+                        "wins": 2,
+                        "matches": 4,
+                        "roundsWon": 40,
+                        "roundsPlayed": 79,
+                        "attackingWon": 23,
+                        "attackingPlayed": 42,
+                        "defendingWon": 17,
+                        "defendingPlayed": 37
+                    },
+                    "haven": {
+                        "wins": 0,
+                        "matches": 1,
+                        "roundsWon": 9,
+                        "roundsPlayed": 22,
+                        "attackingWon": 6,
+                        "attackingPlayed": 12,
+                        "defendingWon": 3,
+                        "defendingPlayed": 10
+                    }
+                }
+            },
+            "career": {
+                "kills": 120,
+                "score": 33777,
+                "deaths": 105,
+                "assists": 54,
+                "roundsPlayed": 149,
+                "playtimeMillis": 16179998,
+                "wins": 3,
+                "roundsWon": 72,
+                "matches": 7,
+                "damageStats": {
+                    "damage": 21109,
+                    "headshots": 50,
+                    "bodyshots": 410,
+                    "legshots": 104
+                },
+                "weaponStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalRange": 25210.448750685217
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalRange": 4790.138071257407
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 22,
+                        "totalRange": 23963.400288730176
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                        "kills": 5,
+                        "totalRange": 16778.976738540972
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalRange": 8556.96492986932
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                        "kills": 3,
+                        "totalRange": 9846.97827303671
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalRange": 712.523683816896
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 31,
+                        "totalRange": 49391.11953043858
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 34,
+                        "totalRange": 54890.62809536471
+                    }
+                },
+                "weaponDamageStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalKillRange": 25210.448750685217,
+                        "altFireKills": 0,
+                        "headshots": 4,
+                        "bodyshots": 68,
+                        "legshots": 16,
+                        "damage": 2379,
+                        "roundsUsed": 34
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalKillRange": 4790.138071257407,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 24,
+                        "legshots": 5,
+                        "damage": 817,
+                        "roundsUsed": 8
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 27,
+                        "totalKillRange": 40742.37702727115,
+                        "altFireKills": 10,
+                        "headshots": 14,
+                        "bodyshots": 88,
+                        "legshots": 17,
+                        "damage": 5085,
+                        "roundsUsed": 43
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalKillRange": 8556.96492986932,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 1,
+                        "legshots": 0,
+                        "damage": 360,
+                        "roundsUsed": 2
+                    },
+                    "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 9,
+                        "legshots": 3,
+                        "damage": 161,
+                        "roundsUsed": 2
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalKillRange": 712.523683816896,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 5,
+                        "legshots": 1,
+                        "damage": 169,
+                        "roundsUsed": 4
+                    },
+                    "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 3,
+                        "legshots": 1,
+                        "damage": 109,
+                        "roundsUsed": 3
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 30,
+                        "totalKillRange": 50325.40838245618,
+                        "altFireKills": 0,
+                        "headshots": 13,
+                        "bodyshots": 126,
+                        "legshots": 30,
+                        "damage": 4637,
+                        "roundsUsed": 46
+                    },
+                    "910BE174-449B-C412-AB22-D0873436B21B": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 8,
+                        "legshots": 2,
+                        "damage": 232,
+                        "roundsUsed": 3
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 28,
+                        "totalKillRange": 49441.21283245088,
+                        "altFireKills": 4,
+                        "headshots": 16,
+                        "bodyshots": 72,
+                        "legshots": 27,
+                        "damage": 5401,
+                        "roundsUsed": 44
+                    },
+                    "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 6,
+                        "legshots": 2,
+                        "damage": 85,
+                        "roundsUsed": 1
+                    }
+                },
+                "economy": 475100,
+                "abilityCasts": {
+                    "grenadeCasts": 89,
+                    "ability1Casts": 118,
+                    "ability2Casts": 101,
+                    "ultimateCasts": 23
+                },
+                "plants": 14,
+                "defuses": 2,
+                "firstBloodsTaken": 6,
+                "firstBloodsGiven": 4,
+                "roundsWonWhenFirstBloodTaken": 3,
+                "roundsLostWhenFirstBloodGiven": 4,
+                "lastKills": 18,
+                "agentsStats": {
+                    "707eab51-4836-f488-046a-cda6bf494859": {
+                        "kills": 51,
+                        "score": 16281,
+                        "deaths": 68,
+                        "assists": 20,
+                        "roundsPlayed": 88,
+                        "playtimeMillis": 9655248,
+                        "wins": 1,
+                        "roundsWon": 37,
+                        "matches": 4,
+                        "damageStats": {
+                            "damage": 10504,
+                            "headshots": 22,
+                            "bodyshots": 199,
+                            "legshots": 59
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalRange": 7516.795615361629
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalRange": 2064.9717330720487
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 22,
+                                "totalRange": 23963.400288730176
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                                "kills": 5,
+                                "totalRange": 16778.976738540972
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 3767.937366783052
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 1,
+                                "totalRange": 3369.5723764299823
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalRange": 712.523683816896
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 8,
+                                "totalRange": 13829.639345468007
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalRange": 10887.397471935932
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalKillRange": 7516.795615361629,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 27,
+                                "legshots": 9,
+                                "damage": 953,
+                                "roundsUsed": 16
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalKillRange": 2064.9717330720487,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 11,
+                                "legshots": 3,
+                                "damage": 401,
+                                "roundsUsed": 4
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 27,
+                                "totalKillRange": 40742.37702727115,
+                                "altFireKills": 10,
+                                "headshots": 14,
+                                "bodyshots": 88,
+                                "legshots": 17,
+                                "damage": 5085,
+                                "roundsUsed": 43
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 3767.937366783052,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 1,
+                                "legshots": 0,
+                                "damage": 105,
+                                "roundsUsed": 1
+                            },
+                            "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 9,
+                                "legshots": 3,
+                                "damage": 161,
+                                "roundsUsed": 2
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalKillRange": 712.523683816896,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 5,
+                                "legshots": 1,
+                                "damage": 169,
+                                "roundsUsed": 4
+                            },
+                            "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 3,
+                                "legshots": 1,
+                                "damage": 109,
+                                "roundsUsed": 3
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalKillRange": 10887.397471935932,
+                                "altFireKills": 0,
+                                "headshots": 2,
+                                "bodyshots": 32,
+                                "legshots": 11,
+                                "damage": 1119,
+                                "roundsUsed": 14
+                            },
+                            "910BE174-449B-C412-AB22-D0873436B21B": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 8,
+                                "legshots": 2,
+                                "damage": 232,
+                                "roundsUsed": 3
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 7,
+                                "totalKillRange": 11246.977733874262,
+                                "altFireKills": 0,
+                                "headshots": 4,
+                                "bodyshots": 15,
+                                "legshots": 12,
+                                "damage": 1495,
+                                "roundsUsed": 12
+                            }
+                        },
+                        "economy": 268400,
+                        "abilityCasts": {
+                            "grenadeCasts": 69,
+                            "ability1Casts": 80,
+                            "ability2Casts": 61,
+                            "ultimateCasts": 11
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    },
+                    "569fdd95-4d10-43ab-ca70-79becc718b46": {
+                        "kills": 69,
+                        "score": 17496,
+                        "deaths": 37,
+                        "assists": 34,
+                        "roundsPlayed": 61,
+                        "playtimeMillis": 6524750,
+                        "wins": 2,
+                        "roundsWon": 35,
+                        "matches": 3,
+                        "damageStats": {
+                            "damage": 10605,
+                            "headshots": 28,
+                            "bodyshots": 211,
+                            "legshots": 45
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalRange": 17693.653135323584
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalRange": 2725.1663381853587
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 29,
+                                "totalRange": 44003.23062342877
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 23,
+                                "totalRange": 35561.48018497056
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 4789.027563086268
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 2,
+                                "totalRange": 6477.405896606728
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalKillRange": 17693.653135323584,
+                                "altFireKills": 0,
+                                "headshots": 3,
+                                "bodyshots": 41,
+                                "legshots": 7,
+                                "damage": 1426,
+                                "roundsUsed": 18
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalKillRange": 2725.1663381853587,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 13,
+                                "legshots": 2,
+                                "damage": 416,
+                                "roundsUsed": 4
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 25,
+                                "totalKillRange": 39438.01091052024,
+                                "altFireKills": 0,
+                                "headshots": 11,
+                                "bodyshots": 94,
+                                "legshots": 19,
+                                "damage": 3518,
+                                "roundsUsed": 32
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 21,
+                                "totalKillRange": 38194.23509857662,
+                                "altFireKills": 4,
+                                "headshots": 12,
+                                "bodyshots": 57,
+                                "legshots": 15,
+                                "damage": 3906,
+                                "roundsUsed": 32
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 4789.027563086268,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 0,
+                                "legshots": 0,
+                                "damage": 255,
+                                "roundsUsed": 1
+                            },
+                            "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 6,
+                                "legshots": 2,
+                                "damage": 85,
+                                "roundsUsed": 1
+                            }
+                        },
+                        "economy": 206700,
+                        "abilityCasts": {
+                            "grenadeCasts": 20,
+                            "ability1Casts": 38,
+                            "ability2Casts": 40,
+                            "ultimateCasts": 12
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    }
+                },
+                "mapStats": {
+                    "bind": {
+                        "wins": 1,
+                        "matches": 2,
+                        "roundsWon": 23,
+                        "roundsPlayed": 48,
+                        "attackingWon": 16,
+                        "attackingPlayed": 23,
+                        "defendingWon": 7,
+                        "defendingPlayed": 25
+                    },
+                    "ascent": {
+                        "wins": 2,
+                        "matches": 4,
+                        "roundsWon": 40,
+                        "roundsPlayed": 79,
+                        "attackingWon": 23,
+                        "attackingPlayed": 42,
+                        "defendingWon": 17,
+                        "defendingPlayed": 37
+                    },
+                    "haven": {
+                        "wins": 0,
+                        "matches": 1,
+                        "roundsWon": 9,
+                        "roundsPlayed": 22,
+                        "attackingWon": 6,
+                        "attackingPlayed": 12,
+                        "defendingWon": 3,
+                        "defendingPlayed": 10
+                    }
+                }
+            }
+        },
+        "custom": {
+            "last20": {
+                "kills": 0,
+                "score": 0,
+                "deaths": 0,
+                "assists": 0,
+                "roundsPlayed": 0,
+                "playtimeMillis": 0,
+                "wins": 0,
+                "roundsWon": 0,
+                "matches": 0,
+                "damageStats": {
+                    "damage": 0,
+                    "headshots": 0,
+                    "bodyshots": 0,
+                    "legshots": 0
+                },
+                "weaponStats": {},
+                "weaponDamageStats": {},
+                "economy": 0,
+                "abilityCasts": {
+                    "grenadeCasts": 0,
+                    "ability1Casts": 0,
+                    "ability2Casts": 0,
+                    "ultimateCasts": 0
+                },
+                "plants": 0,
+                "defuses": 0,
+                "firstBloodsTaken": 0,
+                "firstBloodsGiven": 0,
+                "roundsWonWhenFirstBloodTaken": 0,
+                "roundsLostWhenFirstBloodGiven": 0,
+                "lastKills": 0,
+                "agentsStats": {},
+                "mapStats": {}
+            },
+            "career": {
+                "kills": 0,
+                "score": 0,
+                "deaths": 0,
+                "assists": 0,
+                "roundsPlayed": 0,
+                "playtimeMillis": 0,
+                "wins": 0,
+                "roundsWon": 0,
+                "matches": 0,
+                "damageStats": {
+                    "damage": 0,
+                    "headshots": 0,
+                    "bodyshots": 0,
+                    "legshots": 0
+                },
+                "weaponStats": {},
+                "weaponDamageStats": {},
+                "economy": 0,
+                "abilityCasts": {
+                    "grenadeCasts": 0,
+                    "ability1Casts": 0,
+                    "ability2Casts": 0,
+                    "ultimateCasts": 0
+                },
+                "plants": 0,
+                "defuses": 0,
+                "firstBloodsTaken": 0,
+                "firstBloodsGiven": 0,
+                "roundsWonWhenFirstBloodTaken": 0,
+                "roundsLostWhenFirstBloodGiven": 0,
+                "lastKills": 0,
+                "agentsStats": {},
+                "mapStats": {}
+            }
+        },
+        "overall": {
+            "last20": {
+                "kills": 120,
+                "score": 33777,
+                "deaths": 105,
+                "assists": 54,
+                "roundsPlayed": 149,
+                "playtimeMillis": 16179998,
+                "wins": 3,
+                "roundsWon": 72,
+                "matches": 7,
+                "damageStats": {
+                    "damage": 21109,
+                    "headshots": 50,
+                    "bodyshots": 410,
+                    "legshots": 104
+                },
+                "weaponStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalRange": 25210.448750685217
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalRange": 4790.138071257407
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 22,
+                        "totalRange": 23963.400288730176
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                        "kills": 5,
+                        "totalRange": 16778.976738540972
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalRange": 8556.96492986932
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                        "kills": 3,
+                        "totalRange": 9846.97827303671
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalRange": 712.523683816896
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 31,
+                        "totalRange": 49391.11953043858
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 34,
+                        "totalRange": 54890.62809536471
+                    }
+                },
+                "weaponDamageStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalKillRange": 25210.448750685217,
+                        "altFireKills": 0,
+                        "headshots": 4,
+                        "bodyshots": 68,
+                        "legshots": 16,
+                        "damage": 2379,
+                        "roundsUsed": 34
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalKillRange": 4790.138071257407,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 24,
+                        "legshots": 5,
+                        "damage": 817,
+                        "roundsUsed": 8
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 27,
+                        "totalKillRange": 40742.37702727115,
+                        "altFireKills": 10,
+                        "headshots": 14,
+                        "bodyshots": 88,
+                        "legshots": 17,
+                        "damage": 5085,
+                        "roundsUsed": 43
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalKillRange": 8556.96492986932,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 1,
+                        "legshots": 0,
+                        "damage": 360,
+                        "roundsUsed": 2
+                    },
+                    "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 9,
+                        "legshots": 3,
+                        "damage": 161,
+                        "roundsUsed": 2
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalKillRange": 712.523683816896,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 5,
+                        "legshots": 1,
+                        "damage": 169,
+                        "roundsUsed": 4
+                    },
+                    "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 3,
+                        "legshots": 1,
+                        "damage": 109,
+                        "roundsUsed": 3
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 30,
+                        "totalKillRange": 50325.40838245618,
+                        "altFireKills": 0,
+                        "headshots": 13,
+                        "bodyshots": 126,
+                        "legshots": 30,
+                        "damage": 4637,
+                        "roundsUsed": 46
+                    },
+                    "910BE174-449B-C412-AB22-D0873436B21B": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 8,
+                        "legshots": 2,
+                        "damage": 232,
+                        "roundsUsed": 3
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 28,
+                        "totalKillRange": 49441.21283245088,
+                        "altFireKills": 4,
+                        "headshots": 16,
+                        "bodyshots": 72,
+                        "legshots": 27,
+                        "damage": 5401,
+                        "roundsUsed": 44
+                    },
+                    "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 6,
+                        "legshots": 2,
+                        "damage": 85,
+                        "roundsUsed": 1
+                    }
+                },
+                "economy": 475100,
+                "abilityCasts": {
+                    "grenadeCasts": 89,
+                    "ability1Casts": 118,
+                    "ability2Casts": 101,
+                    "ultimateCasts": 23
+                },
+                "plants": 14,
+                "defuses": 2,
+                "firstBloodsTaken": 6,
+                "firstBloodsGiven": 4,
+                "roundsWonWhenFirstBloodTaken": 3,
+                "roundsLostWhenFirstBloodGiven": 4,
+                "lastKills": 18,
+                "agentsStats": {
+                    "707eab51-4836-f488-046a-cda6bf494859": {
+                        "kills": 51,
+                        "score": 16281,
+                        "deaths": 68,
+                        "assists": 20,
+                        "roundsPlayed": 88,
+                        "playtimeMillis": 9655248,
+                        "wins": 1,
+                        "roundsWon": 37,
+                        "matches": 4,
+                        "damageStats": {
+                            "damage": 10504,
+                            "headshots": 22,
+                            "bodyshots": 199,
+                            "legshots": 59
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalRange": 7516.795615361629
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalRange": 2064.9717330720487
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 22,
+                                "totalRange": 23963.400288730176
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                                "kills": 5,
+                                "totalRange": 16778.976738540972
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 3767.937366783052
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 1,
+                                "totalRange": 3369.5723764299823
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalRange": 712.523683816896
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 8,
+                                "totalRange": 13829.639345468007
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalRange": 10887.397471935932
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalKillRange": 7516.795615361629,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 27,
+                                "legshots": 9,
+                                "damage": 953,
+                                "roundsUsed": 16
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalKillRange": 2064.9717330720487,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 11,
+                                "legshots": 3,
+                                "damage": 401,
+                                "roundsUsed": 4
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 27,
+                                "totalKillRange": 40742.37702727115,
+                                "altFireKills": 10,
+                                "headshots": 14,
+                                "bodyshots": 88,
+                                "legshots": 17,
+                                "damage": 5085,
+                                "roundsUsed": 43
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 3767.937366783052,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 1,
+                                "legshots": 0,
+                                "damage": 105,
+                                "roundsUsed": 1
+                            },
+                            "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 9,
+                                "legshots": 3,
+                                "damage": 161,
+                                "roundsUsed": 2
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalKillRange": 712.523683816896,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 5,
+                                "legshots": 1,
+                                "damage": 169,
+                                "roundsUsed": 4
+                            },
+                            "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 3,
+                                "legshots": 1,
+                                "damage": 109,
+                                "roundsUsed": 3
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalKillRange": 10887.397471935932,
+                                "altFireKills": 0,
+                                "headshots": 2,
+                                "bodyshots": 32,
+                                "legshots": 11,
+                                "damage": 1119,
+                                "roundsUsed": 14
+                            },
+                            "910BE174-449B-C412-AB22-D0873436B21B": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 8,
+                                "legshots": 2,
+                                "damage": 232,
+                                "roundsUsed": 3
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 7,
+                                "totalKillRange": 11246.977733874262,
+                                "altFireKills": 0,
+                                "headshots": 4,
+                                "bodyshots": 15,
+                                "legshots": 12,
+                                "damage": 1495,
+                                "roundsUsed": 12
+                            }
+                        },
+                        "economy": 268400,
+                        "abilityCasts": {
+                            "grenadeCasts": 69,
+                            "ability1Casts": 80,
+                            "ability2Casts": 61,
+                            "ultimateCasts": 11
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    },
+                    "569fdd95-4d10-43ab-ca70-79becc718b46": {
+                        "kills": 69,
+                        "score": 17496,
+                        "deaths": 37,
+                        "assists": 34,
+                        "roundsPlayed": 61,
+                        "playtimeMillis": 6524750,
+                        "wins": 2,
+                        "roundsWon": 35,
+                        "matches": 3,
+                        "damageStats": {
+                            "damage": 10605,
+                            "headshots": 28,
+                            "bodyshots": 211,
+                            "legshots": 45
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalRange": 17693.653135323584
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalRange": 2725.1663381853587
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 29,
+                                "totalRange": 44003.23062342877
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 23,
+                                "totalRange": 35561.48018497056
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 4789.027563086268
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 2,
+                                "totalRange": 6477.405896606728
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalKillRange": 17693.653135323584,
+                                "altFireKills": 0,
+                                "headshots": 3,
+                                "bodyshots": 41,
+                                "legshots": 7,
+                                "damage": 1426,
+                                "roundsUsed": 18
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalKillRange": 2725.1663381853587,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 13,
+                                "legshots": 2,
+                                "damage": 416,
+                                "roundsUsed": 4
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 25,
+                                "totalKillRange": 39438.01091052024,
+                                "altFireKills": 0,
+                                "headshots": 11,
+                                "bodyshots": 94,
+                                "legshots": 19,
+                                "damage": 3518,
+                                "roundsUsed": 32
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 21,
+                                "totalKillRange": 38194.23509857662,
+                                "altFireKills": 4,
+                                "headshots": 12,
+                                "bodyshots": 57,
+                                "legshots": 15,
+                                "damage": 3906,
+                                "roundsUsed": 32
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 4789.027563086268,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 0,
+                                "legshots": 0,
+                                "damage": 255,
+                                "roundsUsed": 1
+                            },
+                            "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 6,
+                                "legshots": 2,
+                                "damage": 85,
+                                "roundsUsed": 1
+                            }
+                        },
+                        "economy": 206700,
+                        "abilityCasts": {
+                            "grenadeCasts": 20,
+                            "ability1Casts": 38,
+                            "ability2Casts": 40,
+                            "ultimateCasts": 12
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    }
+                },
+                "mapStats": {
+                    "bind": {
+                        "wins": 1,
+                        "matches": 2,
+                        "roundsWon": 23,
+                        "roundsPlayed": 48,
+                        "attackingWon": 16,
+                        "attackingPlayed": 23,
+                        "defendingWon": 7,
+                        "defendingPlayed": 25
+                    },
+                    "ascent": {
+                        "wins": 2,
+                        "matches": 4,
+                        "roundsWon": 40,
+                        "roundsPlayed": 79,
+                        "attackingWon": 23,
+                        "attackingPlayed": 42,
+                        "defendingWon": 17,
+                        "defendingPlayed": 37
+                    },
+                    "haven": {
+                        "wins": 0,
+                        "matches": 1,
+                        "roundsWon": 9,
+                        "roundsPlayed": 22,
+                        "attackingWon": 6,
+                        "attackingPlayed": 12,
+                        "defendingWon": 3,
+                        "defendingPlayed": 10
+                    }
+                }
+            },
+            "career": {
+                "kills": 120,
+                "score": 33777,
+                "deaths": 105,
+                "assists": 54,
+                "roundsPlayed": 149,
+                "playtimeMillis": 16179998,
+                "wins": 3,
+                "roundsWon": 72,
+                "matches": 7,
+                "damageStats": {
+                    "damage": 21109,
+                    "headshots": 50,
+                    "bodyshots": 410,
+                    "legshots": 104
+                },
+                "weaponStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalRange": 25210.448750685217
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalRange": 4790.138071257407
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 22,
+                        "totalRange": 23963.400288730176
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                        "kills": 5,
+                        "totalRange": 16778.976738540972
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalRange": 8556.96492986932
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                        "kills": 3,
+                        "totalRange": 9846.97827303671
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalRange": 712.523683816896
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 31,
+                        "totalRange": 49391.11953043858
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 34,
+                        "totalRange": 54890.62809536471
+                    }
+                },
+                "weaponDamageStats": {
+                    "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                        "kills": 16,
+                        "totalKillRange": 25210.448750685217,
+                        "altFireKills": 0,
+                        "headshots": 4,
+                        "bodyshots": 68,
+                        "legshots": 16,
+                        "damage": 2379,
+                        "roundsUsed": 34
+                    },
+                    "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                        "kills": 5,
+                        "totalKillRange": 4790.138071257407,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 24,
+                        "legshots": 5,
+                        "damage": 817,
+                        "roundsUsed": 8
+                    },
+                    "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                        "kills": 27,
+                        "totalKillRange": 40742.37702727115,
+                        "altFireKills": 10,
+                        "headshots": 14,
+                        "bodyshots": 88,
+                        "legshots": 17,
+                        "damage": 5085,
+                        "roundsUsed": 43
+                    },
+                    "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                        "kills": 2,
+                        "totalKillRange": 8556.96492986932,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 1,
+                        "legshots": 0,
+                        "damage": 360,
+                        "roundsUsed": 2
+                    },
+                    "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 9,
+                        "legshots": 3,
+                        "damage": 161,
+                        "roundsUsed": 2
+                    },
+                    "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                        "kills": 1,
+                        "totalKillRange": 712.523683816896,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 5,
+                        "legshots": 1,
+                        "damage": 169,
+                        "roundsUsed": 4
+                    },
+                    "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 0,
+                        "bodyshots": 3,
+                        "legshots": 1,
+                        "damage": 109,
+                        "roundsUsed": 3
+                    },
+                    "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                        "kills": 30,
+                        "totalKillRange": 50325.40838245618,
+                        "altFireKills": 0,
+                        "headshots": 13,
+                        "bodyshots": 126,
+                        "legshots": 30,
+                        "damage": 4637,
+                        "roundsUsed": 46
+                    },
+                    "910BE174-449B-C412-AB22-D0873436B21B": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 8,
+                        "legshots": 2,
+                        "damage": 232,
+                        "roundsUsed": 3
+                    },
+                    "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                        "kills": 28,
+                        "totalKillRange": 49441.21283245088,
+                        "altFireKills": 4,
+                        "headshots": 16,
+                        "bodyshots": 72,
+                        "legshots": 27,
+                        "damage": 5401,
+                        "roundsUsed": 44
+                    },
+                    "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                        "kills": 0,
+                        "totalKillRange": 0,
+                        "altFireKills": 0,
+                        "headshots": 1,
+                        "bodyshots": 6,
+                        "legshots": 2,
+                        "damage": 85,
+                        "roundsUsed": 1
+                    }
+                },
+                "economy": 475100,
+                "abilityCasts": {
+                    "grenadeCasts": 89,
+                    "ability1Casts": 118,
+                    "ability2Casts": 101,
+                    "ultimateCasts": 23
+                },
+                "plants": 14,
+                "defuses": 2,
+                "firstBloodsTaken": 6,
+                "firstBloodsGiven": 4,
+                "roundsWonWhenFirstBloodTaken": 3,
+                "roundsLostWhenFirstBloodGiven": 4,
+                "lastKills": 18,
+                "agentsStats": {
+                    "707eab51-4836-f488-046a-cda6bf494859": {
+                        "kills": 51,
+                        "score": 16281,
+                        "deaths": 68,
+                        "assists": 20,
+                        "roundsPlayed": 88,
+                        "playtimeMillis": 9655248,
+                        "wins": 1,
+                        "roundsWon": 37,
+                        "matches": 4,
+                        "damageStats": {
+                            "damage": 10504,
+                            "headshots": 22,
+                            "bodyshots": 199,
+                            "legshots": 59
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalRange": 7516.795615361629
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalRange": 2064.9717330720487
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 22,
+                                "totalRange": 23963.400288730176
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7_alt": {
+                                "kills": 5,
+                                "totalRange": 16778.976738540972
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 3767.937366783052
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 1,
+                                "totalRange": 3369.5723764299823
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalRange": 712.523683816896
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 8,
+                                "totalRange": 13829.639345468007
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalRange": 10887.397471935932
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 5,
+                                "totalKillRange": 7516.795615361629,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 27,
+                                "legshots": 9,
+                                "damage": 953,
+                                "roundsUsed": 16
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 2,
+                                "totalKillRange": 2064.9717330720487,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 11,
+                                "legshots": 3,
+                                "damage": 401,
+                                "roundsUsed": 4
+                            },
+                            "AE3DE142-4D85-2547-DD26-4E90BED35CF7": {
+                                "kills": 27,
+                                "totalKillRange": 40742.37702727115,
+                                "altFireKills": 10,
+                                "headshots": 14,
+                                "bodyshots": 88,
+                                "legshots": 17,
+                                "damage": 5085,
+                                "roundsUsed": 43
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 3767.937366783052,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 1,
+                                "legshots": 0,
+                                "damage": 105,
+                                "roundsUsed": 1
+                            },
+                            "EC845BF4-4F79-DDDA-A3DA-0DB3774B2794": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 9,
+                                "legshots": 3,
+                                "damage": 161,
+                                "roundsUsed": 2
+                            },
+                            "9C82E19D-4575-0200-1A81-3EACF00CF872": {
+                                "kills": 1,
+                                "totalKillRange": 712.523683816896,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 5,
+                                "legshots": 1,
+                                "damage": 169,
+                                "roundsUsed": 4
+                            },
+                            "55D8A0F4-4274-CA67-FE2C-06AB45EFDF58": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 3,
+                                "legshots": 1,
+                                "damage": 109,
+                                "roundsUsed": 3
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 5,
+                                "totalKillRange": 10887.397471935932,
+                                "altFireKills": 0,
+                                "headshots": 2,
+                                "bodyshots": 32,
+                                "legshots": 11,
+                                "damage": 1119,
+                                "roundsUsed": 14
+                            },
+                            "910BE174-449B-C412-AB22-D0873436B21B": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 8,
+                                "legshots": 2,
+                                "damage": 232,
+                                "roundsUsed": 3
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 7,
+                                "totalKillRange": 11246.977733874262,
+                                "altFireKills": 0,
+                                "headshots": 4,
+                                "bodyshots": 15,
+                                "legshots": 12,
+                                "damage": 1495,
+                                "roundsUsed": 12
+                            }
+                        },
+                        "economy": 268400,
+                        "abilityCasts": {
+                            "grenadeCasts": 69,
+                            "ability1Casts": 80,
+                            "ability2Casts": 61,
+                            "ultimateCasts": 11
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    },
+                    "569fdd95-4d10-43ab-ca70-79becc718b46": {
+                        "kills": 69,
+                        "score": 17496,
+                        "deaths": 37,
+                        "assists": 34,
+                        "roundsPlayed": 61,
+                        "playtimeMillis": 6524750,
+                        "wins": 2,
+                        "roundsWon": 35,
+                        "matches": 3,
+                        "damageStats": {
+                            "damage": 10605,
+                            "headshots": 28,
+                            "bodyshots": 211,
+                            "legshots": 45
+                        },
+                        "weaponStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalRange": 17693.653135323584
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalRange": 2725.1663381853587
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 29,
+                                "totalRange": 44003.23062342877
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 23,
+                                "totalRange": 35561.48018497056
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalRange": 4789.027563086268
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A_alt": {
+                                "kills": 2,
+                                "totalRange": 6477.405896606728
+                            }
+                        },
+                        "weaponDamageStats": {
+                            "29A0CFAB-485B-F5D5-779A-B59F85E204A8": {
+                                "kills": 11,
+                                "totalKillRange": 17693.653135323584,
+                                "altFireKills": 0,
+                                "headshots": 3,
+                                "bodyshots": 41,
+                                "legshots": 7,
+                                "damage": 1426,
+                                "roundsUsed": 18
+                            },
+                            "1BAA85B4-4C70-1284-64BB-6481DFC3BB4E": {
+                                "kills": 3,
+                                "totalKillRange": 2725.1663381853587,
+                                "altFireKills": 0,
+                                "headshots": 0,
+                                "bodyshots": 13,
+                                "legshots": 2,
+                                "damage": 416,
+                                "roundsUsed": 4
+                            },
+                            "462080D1-4035-2937-7C09-27AA2A5C27A7": {
+                                "kills": 25,
+                                "totalKillRange": 39438.01091052024,
+                                "altFireKills": 0,
+                                "headshots": 11,
+                                "bodyshots": 94,
+                                "legshots": 19,
+                                "damage": 3518,
+                                "roundsUsed": 32
+                            },
+                            "EE8E8D15-496B-07AC-E5F6-8FAE5D4C7B1A": {
+                                "kills": 21,
+                                "totalKillRange": 38194.23509857662,
+                                "altFireKills": 4,
+                                "headshots": 12,
+                                "bodyshots": 57,
+                                "legshots": 15,
+                                "damage": 3906,
+                                "roundsUsed": 32
+                            },
+                            "A03B24D3-4319-996D-0F8C-94BBFBA1DFC7": {
+                                "kills": 1,
+                                "totalKillRange": 4789.027563086268,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 0,
+                                "legshots": 0,
+                                "damage": 255,
+                                "roundsUsed": 1
+                            },
+                            "42DA8CCC-40D5-AFFC-BEEC-15AA47B42EDA": {
+                                "kills": 0,
+                                "totalKillRange": 0,
+                                "altFireKills": 0,
+                                "headshots": 1,
+                                "bodyshots": 6,
+                                "legshots": 2,
+                                "damage": 85,
+                                "roundsUsed": 1
+                            }
+                        },
+                        "economy": 206700,
+                        "abilityCasts": {
+                            "grenadeCasts": 20,
+                            "ability1Casts": 38,
+                            "ability2Casts": 40,
+                            "ultimateCasts": 12
+                        },
+                        "plants": 0,
+                        "defuses": 0,
+                        "firstBloodsTaken": 0,
+                        "firstBloodsGiven": 0,
+                        "roundsWonWhenFirstBloodTaken": 0,
+                        "roundsLostWhenFirstBloodGiven": 0,
+                        "lastKills": 0
+                    }
+                },
+                "mapStats": {
+                    "bind": {
+                        "wins": 1,
+                        "matches": 2,
+                        "roundsWon": 23,
+                        "roundsPlayed": 48,
+                        "attackingWon": 16,
+                        "attackingPlayed": 23,
+                        "defendingWon": 7,
+                        "defendingPlayed": 25
+                    },
+                    "ascent": {
+                        "wins": 2,
+                        "matches": 4,
+                        "roundsWon": 40,
+                        "roundsPlayed": 79,
+                        "attackingWon": 23,
+                        "attackingPlayed": 42,
+                        "defendingWon": 17,
+                        "defendingPlayed": 37
+                    },
+                    "haven": {
+                        "wins": 0,
+                        "matches": 1,
+                        "roundsWon": 9,
+                        "roundsPlayed": 22,
+                        "attackingWon": 6,
+                        "attackingPlayed": 12,
+                        "defendingWon": 3,
+                        "defendingPlayed": 10
+                    }
+                }
+            }
+        }
+    }
+}
