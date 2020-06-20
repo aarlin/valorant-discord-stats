@@ -123,7 +123,7 @@ func postStatsToDiscord(nametag string, hitRate HitPercentages) {
 	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
 	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
 	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
-	content := fmt.Sprintf("Career Stats for %s:\n%s %s %s", nametag, headShots, bodyShots, legShots)
+	content := fmt.Sprintf("Career Stats for %s:\n%s%s%s", nametag, headShots, bodyShots, legShots)
 
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
 	discordMessage := map[string]interface{} {
