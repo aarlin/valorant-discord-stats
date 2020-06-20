@@ -25,6 +25,7 @@ type DamageStats struct {
 }
 type Career struct {
 	DamageStats DamageStats
+	Matches int
 }
 type Overall struct {
 	Career Career
@@ -35,17 +36,17 @@ type Stats struct {
 type ValorantStats struct {
 	Nametag string
 	Id string
-	Stats Stats
+	Stats Stats	
 }
 
 
 func main() {
 
-	nametag := "bad-nametag"
+	nametag := "fompei-na1"
 	json := retrieveBlitzData(nametag)
 	playerStats := parseValorantData(nametag, json)
 	hitRateData := calculateHitPercentages(playerStats)
-	postStatsToDiscord(nametag, hitRateData)
+	postStatsToDiscord(nametag, playerStats, hitRateData)
 	fmt.Println(hitRateData)
 }
 
@@ -119,11 +120,12 @@ func postError(nametag string) {
 	log.Println(result["data"])
 }
 
-func postStatsToDiscord(nametag string, hitRate HitPercentages) {
+func postStatsToDiscord(nametag string, stats ValorantStats, hitRate HitPercentages) {
 	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
 	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
 	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
-	content := fmt.Sprintf("Career Stats for %s:\n%s%s%s", nametag, headShots, bodyShots, legShots)
+	matchesPlayed := stats.Stats.Overall.Career.Matches
+	content := fmt.Sprintf("Career Stats for %s:\n%s%s%s\n Total number of matches: %d", nametag, headShots, bodyShots, legShots, matchesPlayed)
 
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
 	discordMessage := map[string]interface{} {
