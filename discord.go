@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math"
 	"github.com/dariubs/percent"
+	"os"
 )
 
 type HitPercentages struct {
@@ -23,12 +24,13 @@ type DamageStats struct {
 	LegShots  int
 	Damage    int
 }
-type Career struct {
+type MatchStatistics struct {
 	DamageStats DamageStats
 	Matches int
 }
 type Overall struct {
-	Career Career
+	Career MatchStatistics
+	Last20 MatchStatistics
 }
 type Stats struct {
 	Overall Overall
@@ -41,13 +43,14 @@ type ValorantStats struct {
 
 
 func main() {
-
-	nametag := "fompei-na1"
+	nametag := os.Args[1]
 	json := retrieveBlitzData(nametag)
 	playerStats := parseValorantData(nametag, json)
-	hitRateData := calculateHitPercentages(playerStats)
-	postStatsToDiscord(nametag, playerStats, hitRateData)
-	fmt.Println(hitRateData)
+	careerHitRateData := calculateHitPercentages(playerStats, "career")
+	lastTwentyHitRateData := calculateHitPercentages(playerStats, "last20")
+	postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
+	postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
+	fmt.Printf("%f%f", careerHitRateData, lastTwentyHitRateData)
 }
 
 func retrieveBlitzData(nametag string) []byte {
@@ -65,7 +68,6 @@ func retrieveBlitzData(nametag string) []byte {
 	}
 
 	return body
-	
 }
 
 func parseValorantData(nametag string, blitzJson []byte) ValorantStats {
@@ -78,17 +80,30 @@ func parseValorantData(nametag string, blitzJson []byte) ValorantStats {
 	return valorantStats
 }
 
-func calculateHitPercentages(valorantStats ValorantStats) HitPercentages {
-	headShots := valorantStats.Stats.Overall.Career.DamageStats.HeadShots
-	bodyShots := valorantStats.Stats.Overall.Career.DamageStats.BodyShots
-	legShots  := valorantStats.Stats.Overall.Career.DamageStats.LegShots
+func calculateHitPercentages(valorantStats ValorantStats, matchStatisticType string) HitPercentages {
+	headShots := 0
+	bodyShots := 0
+	legShots := 0
+
+	switch matchStatisticType {
+		case "career": 		
+			headShots = valorantStats.Stats.Overall.Career.DamageStats.HeadShots
+			bodyShots = valorantStats.Stats.Overall.Career.DamageStats.BodyShots
+			legShots  = valorantStats.Stats.Overall.Career.DamageStats.LegShots
+		case "last20":
+			headShots = valorantStats.Stats.Overall.Last20.DamageStats.HeadShots
+			bodyShots = valorantStats.Stats.Overall.Last20.DamageStats.BodyShots
+			legShots  = valorantStats.Stats.Overall.Last20.DamageStats.LegShots
+
+		default: fmt.Println("Incorrect matchStatisticType, please choose between career and last20")
+	}
 
 	var hitPercentages HitPercentages
 	totalShots := headShots + bodyShots + legShots
 	hitPercentages.HeadShotPercentage = roundPercentage(percent.PercentOf(headShots, totalShots))
 	hitPercentages.BodyShotPercentage = roundPercentage(percent.PercentOf(bodyShots, totalShots))
 	hitPercentages.LegShotPercentage  = roundPercentage(percent.PercentOf(legShots, totalShots))
-
+	
 	return hitPercentages
 }
 
@@ -120,12 +135,17 @@ func postError(nametag string) {
 	log.Println(result["data"])
 }
 
-func postStatsToDiscord(nametag string, stats ValorantStats, hitRate HitPercentages) {
+func postStatsToDiscord(nametag string, stats ValorantStats, hitRate HitPercentages, matchStatisticType string) {
 	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
 	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
 	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
 	matchesPlayed := stats.Stats.Overall.Career.Matches
-	content := fmt.Sprintf("Career Stats for %s:\n%s%s%s\n Total number of matches: %d", nametag, headShots, bodyShots, legShots, matchesPlayed)
+	content := ""
+	switch matchStatisticType {
+	case "career": 	content = fmt.Sprintf("Career Stats for %s:\nTotal number of matches: %d\n%s%s%s\n", nametag, matchesPlayed, headShots, bodyShots, legShots)
+	case "last20": content = fmt.Sprintf("Last 20 Games Stats for %s:\n%s%s%s\n", nametag, headShots, bodyShots, legShots)
+	default: content = fmt.Sprintf("Something went wrong choosing the statistic type when posting to Discord")
+	}
 
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
 	discordMessage := map[string]interface{} {
