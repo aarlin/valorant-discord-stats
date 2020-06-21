@@ -142,15 +142,44 @@ func postStatsToDiscord(nametag string, stats ValorantStats, hitRate HitPercenta
 	matchesPlayed := stats.Stats.Overall.Career.Matches
 	content := ""
 	switch matchStatisticType {
-	case "career": 	content = fmt.Sprintf("Career Stats for %s:\nTotal number of matches: %d\n%s%s%s\n", nametag, matchesPlayed, headShots, bodyShots, legShots)
-	case "last20": content = fmt.Sprintf("Last 20 Games Stats for %s:\n%s%s%s\n", nametag, headShots, bodyShots, legShots)
-	default: content = fmt.Sprintf("Something went wrong choosing the statistic type when posting to Discord")
+		case "career": 	content = fmt.Sprintf("Career Stats for %s:\nTotal number of matches: %d\n%s%s%s\n", nametag, matchesPlayed, headShots, bodyShots, legShots)
+		case "last20": content = fmt.Sprintf("Last 20 Games Stats for %s:\n%s%s%s\n", nametag, headShots, bodyShots, legShots)
+		default: content = fmt.Sprintf("Something went wrong choosing the statistic type when posting to Discord")
 	}
 
-	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
-	discordMessage := map[string]interface{} {
-		"content": content,
+	// generated from https://mholt.github.io/json-to-go/
+
+	type Field struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
 	}
+	type Embed struct {
+		Title  string  `json:"title"`
+		Color  int     `json:"color"`
+		Fields []Field `json:"fields"`
+	}
+	type DiscordMessage struct {
+		Embeds []Embed `json:"embeds"`
+	}	
+
+
+	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
+	discordMessage := DiscordMessage{
+		Embeds: []Embed{
+			Embed{
+				Title: "Valorant Statistics",
+				Color: 16582407,
+				Fields: []Field{
+					Field{
+						Name: "Career Statistics",
+						Value: content,
+					},
+				},
+			},
+		},
+	}
+
+	fmt.Println(discordMessage)
 
 	bytesRepresentation, err := json.Marshal(discordMessage)
 	if err != nil {
