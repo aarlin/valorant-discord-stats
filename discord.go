@@ -10,6 +10,7 @@ import (
 	"math"
 	"github.com/dariubs/percent"
 	"os"
+	"time"
 )
 
 type HitPercentages struct {
@@ -41,15 +42,61 @@ type ValorantStats struct {
 	Stats Stats	
 }
 
+type Damage struct {
+	Damage    int    `json:"damage"`
+	Legshots  int    `json:"legshots"`
+	Receiver  string `json:"receiver"`
+	Bodyshots int    `json:"bodyshots"`
+	Headshots int    `json:"headshots"`
+}
+
+type PlayerStat struct {
+	Score  int `json:"score"`
+	Damage []Damage `json:"damage"`
+	WasAfk  bool `json:"wasAfk"`
+	Subject      string `json:"subject"`
+	WasPenalized bool   `json:"wasPenalized"`
+}
+
+type RoundResult struct { 
+	RoundNum    int    `json:"roundNum"`
+	PlantSite   string `json:"plantSite"`
+	BombPlanter string `json:"bombPlanter,omitempty"`
+	PlayerStats []PlayerStat `json:"playerStats"`
+	RoundResult  string `json:"roundResult"`
+	WinningTeam  string `json:"winningTeam"`
+}
+
+type MatchHistory struct {
+	ID     		 string 	   `json:"id"`
+	Map    	     string 	   `json:"map"`
+	Mode   		 string 	   `json:"mode"`
+	Ranked 		 bool   	   `json:"ranked"`
+	RoundResults []RoundResult `json:"roundResults"`
+	StartedAt 	 time.Time 	   `json:"startedAt"`
+	Length    	 int       	   `json:"length"`
+	Queue        string        `json:"queue"`
+	Season    	 string        `json:"season"`
+	Version   	 string        `json:"version"`
+}
+
+type MatchHistoryOffset struct {
+	Count int
+	Data []MatchHistory
+	Limit int
+	Offset string
+}
+
 
 func main() {
 	nametag := os.Args[1]
-	json := retrieveBlitzData(nametag)
-	playerStats := parseValorantData(nametag, json)
-	careerHitRateData := calculateHitPercentages(playerStats, "career")
-	lastTwentyHitRateData := calculateHitPercentages(playerStats, "last20")
-	postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
-	postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
+	var json []byte = retrieveBlitzData(nametag)
+	var playerStats ValorantStats = parseValorantData(nametag, json)
+	var careerHitRateData HitPercentages = calculateHitPercentages(playerStats, "career")
+	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(playerStats, "last20")
+	// postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
+	// postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
+	postToSpreadsheet(playerStats.Id)
 	fmt.Printf("%f%f", careerHitRateData, lastTwentyHitRateData)
 }
 
@@ -78,6 +125,33 @@ func parseValorantData(nametag string, blitzJson []byte) ValorantStats {
 		log.Fatalln(err)
 	}
 	return valorantStats
+}
+
+func postToSpreadsheet(playerID string) {
+	matchHistoryEndpoint := fmt.Sprintf("https://valorant.iesdev.com/matches/%s?offset=0&queue=", playerID)
+	resp, err := http.Get(matchHistoryEndpoint)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var matchHistoryOffset MatchHistoryOffset 
+	errUnmarshal := json.Unmarshal(body, &matchHistoryOffset) 
+	if errUnmarshal != nil {
+		postError(playerID)
+		log.Fatalln(errUnmarshal)
+	}
+
+	for index, match := range matchHistoryOffset.Data {
+		fmt.Printf("%d: %s\n", index, match.ID)
+	}
+
 }
 
 func calculateHitPercentages(valorantStats ValorantStats, matchStatisticType string) HitPercentages {
