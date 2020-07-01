@@ -20,9 +20,9 @@ type HitPercentages struct {
 }
 
 type DamageStats struct {
-	BodyShots int
-	HeadShots int
-	LegShots  int
+	Bodyshots int
+	Headshots int
+	Legshots  int
 	Damage    int
 }
 type MatchStatistics struct {
@@ -43,9 +43,9 @@ type ValorantStats struct {
 }
 
 type Damage struct {
+	Receiver  string `json:"receiver"`
 	Damage    int    `json:"damage"`
 	Legshots  int    `json:"legshots"`
-	Receiver  string `json:"receiver"`
 	Bodyshots int    `json:"bodyshots"`
 	Headshots int    `json:"headshots"`
 }
@@ -96,7 +96,8 @@ func main() {
 	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(playerStats, "last20")
 	// postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
 	// postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
-	postToSpreadsheet(playerStats.Id)
+	matches := retrieveMatches(playerStats.Id)
+	retrieveMatchStats(playerStats, matches)
 	fmt.Printf("%f%f", careerHitRateData, lastTwentyHitRateData)
 }
 
@@ -127,7 +128,7 @@ func parseValorantData(nametag string, blitzJson []byte) ValorantStats {
 	return valorantStats
 }
 
-func postToSpreadsheet(playerID string) {
+func retrieveMatches(playerID string) []string {
 	matchHistoryEndpoint := fmt.Sprintf("https://valorant.iesdev.com/matches/%s?offset=0&queue=", playerID)
 	resp, err := http.Get(matchHistoryEndpoint)
 	if err != nil {
@@ -148,11 +149,114 @@ func postToSpreadsheet(playerID string) {
 		log.Fatalln(errUnmarshal)
 	}
 
-	for index, match := range matchHistoryOffset.Data {
-		fmt.Printf("%d: %s\n", index, match.ID)
+	var matches []string = make([]string, 0, 10)
+
+	for _, match := range matchHistoryOffset.Data {
+		matches = append(matches, match.ID)
 	}
 
+	// fmt.Println(matches)
+	return matches
+
 }
+
+func retrieveMatchStats(player ValorantStats, matches []string) {
+	var matchDamageStatistics = make(map[string]*DamageStats)
+	// fmt.Println(matches)
+	
+	matchEndpoint := fmt.Sprintf("https://valorant.iesdev.com/match/%s", matches[0])
+	// fmt.Printf("match 0 is %s\n",matches[:1])
+	resp, err := http.Get(matchEndpoint)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var matchHistory MatchHistory 
+	errUnmarshal := json.Unmarshal(body, &matchHistory) 
+	if errUnmarshal != nil {
+		postError(player.Nametag)
+		log.Fatalln(errUnmarshal)
+	}
+
+	// make call to each match id using get request 
+	// then do this nested for loop to grab all damage
+	matchDamageStatistics[matchHistory.ID] = &DamageStats{0, 0, 0, 0}
+	for _, roundResult := range matchHistory.RoundResults {
+		for _, playerStat := range roundResult.PlayerStats {
+			if playerStat.Subject == player.Id {
+				for _, damage := range playerStat.Damage { // array of damages done to different enemies in the round
+					matchDamageStatistics[matchHistory.ID].Damage += damage.Damage
+					matchDamageStatistics[matchHistory.ID].Headshots += damage.Headshots
+					matchDamageStatistics[matchHistory.ID].Bodyshots += damage.Bodyshots
+					matchDamageStatistics[matchHistory.ID].Legshots += damage.Legshots
+				}
+			}
+		}
+	}
+	var matchStats = fmt.Sprintf("Match ID: %s\nHeadshots: %d\nBodyshots: %d\nLegshots: %d\nDamage: %d\n", 
+		matchHistory.ID, 
+		matchDamageStatistics[matchHistory.ID].Headshots, 
+		matchDamageStatistics[matchHistory.ID].Bodyshots, 
+		matchDamageStatistics[matchHistory.ID].Legshots, 
+		matchDamageStatistics[matchHistory.ID].Damage)
+	fmt.Println(matchStats)
+
+	type Field struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
+	}
+	type Embed struct {
+		Title  string  `json:"title"`
+		Color  int     `json:"color"`
+		Fields []Field `json:"fields"`
+	}
+	type DiscordMessage struct {
+		Embeds []Embed `json:"embeds"`
+	}	
+
+
+	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
+	discordMessage := DiscordMessage{
+		Embeds: []Embed{
+			Embed{
+				Title: "Last Game Statistics",
+				Color: 16582407,
+				Fields: []Field{
+					Field{
+						Name: "Match 1",
+						Value: matchStats,
+					},
+				},
+			},
+		},
+	}
+
+	fmt.Println(discordMessage)
+
+	bytesRepresentation, err := json.Marshal(discordMessage)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	respWebhook, err := http.Post(discordWebhook, "application/json", bytes.NewBuffer(bytesRepresentation))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	var result map[string]interface{}
+	json.NewDecoder(respWebhook.Body).Decode(&result)
+
+	log.Println(result)
+	log.Println(result["data"])
+}
+
 
 func calculateHitPercentages(valorantStats ValorantStats, matchStatisticType string) HitPercentages {
 	headShots := 0
@@ -161,13 +265,13 @@ func calculateHitPercentages(valorantStats ValorantStats, matchStatisticType str
 
 	switch matchStatisticType {
 		case "career": 		
-			headShots = valorantStats.Stats.Overall.Career.DamageStats.HeadShots
-			bodyShots = valorantStats.Stats.Overall.Career.DamageStats.BodyShots
-			legShots  = valorantStats.Stats.Overall.Career.DamageStats.LegShots
+			headShots = valorantStats.Stats.Overall.Career.DamageStats.Headshots
+			bodyShots = valorantStats.Stats.Overall.Career.DamageStats.Bodyshots
+			legShots  = valorantStats.Stats.Overall.Career.DamageStats.Legshots
 		case "last20":
-			headShots = valorantStats.Stats.Overall.Last20.DamageStats.HeadShots
-			bodyShots = valorantStats.Stats.Overall.Last20.DamageStats.BodyShots
-			legShots  = valorantStats.Stats.Overall.Last20.DamageStats.LegShots
+			headShots = valorantStats.Stats.Overall.Last20.DamageStats.Headshots
+			bodyShots = valorantStats.Stats.Overall.Last20.DamageStats.Bodyshots
+			legShots  = valorantStats.Stats.Overall.Last20.DamageStats.Legshots
 
 		default: fmt.Println("Incorrect matchStatisticType, please choose between career and last20")
 	}
