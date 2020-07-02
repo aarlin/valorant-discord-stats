@@ -222,15 +222,20 @@ func retrieveMatchStats(player ValorantStats, matches []string) {
 		Name  string `json:"name"`
 		Value string `json:"value"`
 	}
+	type Thumbnail struct {
+		URL string `json:"url"`
+	}
 	type Embed struct {
-		Title  string  `json:"title"`
-		Color  int     `json:"color"`
-		Fields []Field `json:"fields"`
+		Title  string  		`json:"title"`
+		Color  int     		`json:"color"`
+		Fields []Field 		`json:"fields"`
+		Thumbnail Thumbnail `json:"thumbnail"`
 	}
 	type DiscordMessage struct {
 		Embeds []Embed `json:"embeds"`
 	}	
 
+	var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
 	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
 	discordMessage := DiscordMessage{
@@ -244,8 +249,12 @@ func retrieveMatchStats(player ValorantStats, matches []string) {
 						Value: matchStats,
 					},
 				},
+				Thumbnail: Thumbnail{
+					URL: mapImage,
+				},
 			},
 		},
+		
 	}
 
 	fmt.Println(discordMessage)
