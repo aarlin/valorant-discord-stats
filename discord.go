@@ -92,8 +92,12 @@ func main() {
 	nametag := os.Args[1]
 	var json []byte = retrieveBlitzData(nametag)
 	var playerStats ValorantStats = parseValorantData(nametag, json)
-	var careerHitRateData HitPercentages = calculateHitPercentages(playerStats, "career")
-	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(playerStats, "last20")
+
+	var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
+	var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
+
+	var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
+	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
 	// postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
 	// postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
 	matches := retrieveMatches(playerStats.Id)
@@ -200,11 +204,17 @@ func retrieveMatchStats(player ValorantStats, matches []string) {
 			}
 		}
 	}
-	var matchStats = fmt.Sprintf("Match ID: %s\nHeadshots: %d\nBodyshots: %d\nLegshots: %d\nDamage: %d\n", 
+	
+	var matchPercentages = calculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
+	fmt.Println(matchPercentages)
+
+	var matchStats = fmt.Sprintf("Nametag: %s\nMatch ID: %s\nMap: %s\nHeadshots: %d (%.2f%%)\nBodyshots: %d (%.2f%%)\nLegshots: %d(%.2f%%)\nDamage: %d\n", 
+		player.Nametag,
 		matchHistory.ID, 
-		matchDamageStatistics[matchHistory.ID].Headshots, 
-		matchDamageStatistics[matchHistory.ID].Bodyshots, 
-		matchDamageStatistics[matchHistory.ID].Legshots, 
+		matchHistory.Map,
+		matchDamageStatistics[matchHistory.ID].Headshots, matchPercentages.HeadShotPercentage,
+		matchDamageStatistics[matchHistory.ID].Bodyshots, matchPercentages.BodyShotPercentage,
+		matchDamageStatistics[matchHistory.ID].Legshots, matchPercentages.LegShotPercentage,
 		matchDamageStatistics[matchHistory.ID].Damage)
 	fmt.Println(matchStats)
 
@@ -258,23 +268,10 @@ func retrieveMatchStats(player ValorantStats, matches []string) {
 }
 
 
-func calculateHitPercentages(valorantStats ValorantStats, matchStatisticType string) HitPercentages {
-	headShots := 0
-	bodyShots := 0
-	legShots := 0
-
-	switch matchStatisticType {
-		case "career": 		
-			headShots = valorantStats.Stats.Overall.Career.DamageStats.Headshots
-			bodyShots = valorantStats.Stats.Overall.Career.DamageStats.Bodyshots
-			legShots  = valorantStats.Stats.Overall.Career.DamageStats.Legshots
-		case "last20":
-			headShots = valorantStats.Stats.Overall.Last20.DamageStats.Headshots
-			bodyShots = valorantStats.Stats.Overall.Last20.DamageStats.Bodyshots
-			legShots  = valorantStats.Stats.Overall.Last20.DamageStats.Legshots
-
-		default: fmt.Println("Incorrect matchStatisticType, please choose between career and last20")
-	}
+func calculateHitPercentages(damageStats DamageStats) HitPercentages {
+	headShots := damageStats.Headshots
+	bodyShots := damageStats.Bodyshots
+	legShots := damageStats.Legshots
 
 	var hitPercentages HitPercentages
 	totalShots := headShots + bodyShots + legShots
