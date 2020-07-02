@@ -11,7 +11,87 @@ import (
 	"github.com/dariubs/percent"
 	"os"
 	"time"
+	"flag"
+	"os/signal"
+	"syscall"
+	"github.com/bwmarrin/discordgo"
+	"strings"
 )
+
+// Variables used for command line parameters
+var (
+	Token string
+)
+
+func init() {
+
+	flag.StringVar(&Token, "t", "", "Bot Token")
+	flag.Parse()
+}
+
+// This function will be called (due to AddHandler above) every time a new
+// message is created on any channel that the authenticated bot has access to.
+func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
+
+	// Ignore all messages created by the bot itself
+	// This isn't required in this specific example but it's a good practice.
+	if m.Author.ID == s.State.User.ID {
+		return
+	}
+	// If the message is "ping" reply with "Pong!"
+	if strings.Contains(m.Content, "!career") {
+		if len(strings.Split(m.Content, " ")) > 1 {
+			nametag := strings.Split(m.Content, " ")[1]
+			generateCareerStats(nametag)
+			// s.ChannelMessageSend(m.ChannelID, "Pong!")
+		}
+
+	} else if  strings.Contains(m.Content, "!last20") {
+		if len(strings.Split(m.Content, " ")) > 1 {
+			nametag := strings.Split(m.Content, " ")[1]
+			generateLast20Stats(nametag)
+			// s.ChannelMessageSend(m.ChannelID, "Pong!")
+		}
+	} else if  strings.Contains(m.Content, "!lastgame") {
+		if len(strings.Split(m.Content, " ")) > 1 {
+			nametag := strings.Split(m.Content, " ")[1]
+			generateLastGameStats(nametag)
+			// s.ChannelMessageSend(m.ChannelID, "Pong!")
+		}
+	} else if m.Content == "!commands" {
+		s.ChannelMessageSend(m.ChannelID, "Commands are\n!career <nametag>\n!last20 <nametag>\n!lastgame <nametag\n")
+	}
+}
+
+func generateCareerStats(nametag string) {
+	var json []byte = retrieveBlitzData(nametag)
+	var playerStats ValorantStats = parseValorantData(nametag, json)
+
+	var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
+
+	var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
+	postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
+	fmt.Printf("%f", careerHitRateData)
+}
+
+func generateLast20Stats(nametag string) {
+	var json []byte = retrieveBlitzData(nametag)
+	var playerStats ValorantStats = parseValorantData(nametag, json)
+
+	var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
+
+	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
+	postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
+	fmt.Printf("%f", lastTwentyHitRateData)
+}
+
+func generateLastGameStats(nametag string) {
+	var json []byte = retrieveBlitzData(nametag)
+	var playerStats ValorantStats = parseValorantData(nametag, json)
+
+	matches := retrieveMatches(playerStats.Id)
+	retrieveMatchStats(playerStats, matches)
+}
 
 type HitPercentages struct {
 	HeadShotPercentage float64
@@ -89,20 +169,32 @@ type MatchHistoryOffset struct {
 
 
 func main() {
-	nametag := os.Args[1]
-	var json []byte = retrieveBlitzData(nametag)
-	var playerStats ValorantStats = parseValorantData(nametag, json)
+	
+	// Create a new Discord session using the provided bot token.
+	dg, err := discordgo.New("Bot " + Token)
+	if err != nil {
+		fmt.Println("error creating Discord session,", err)
+		return
+	}
 
-	var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
-	var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
+	// Register the messageCreate func as a callback for MessageCreate events.
+	dg.AddHandler(messageCreate)
 
-	var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
-	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
-	// postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
-	// postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
-	matches := retrieveMatches(playerStats.Id)
-	retrieveMatchStats(playerStats, matches)
-	fmt.Printf("%f%f", careerHitRateData, lastTwentyHitRateData)
+	// Open a websocket connection to Discord and begin listening.
+	err = dg.Open()
+	if err != nil {
+		fmt.Println("error opening connection,", err)
+		return
+	}
+
+	// Wait here until CTRL-C or other term signal is received.
+	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	<-sc
+
+	// Cleanly close down the Discord session.
+	dg.Close()
 }
 
 func retrieveBlitzData(nametag string) []byte {
