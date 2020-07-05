@@ -20,9 +20,9 @@ Follow this [guide](https://www.writebots.com/discord-bot-token/) up until step 
 | Command             | Description                                       |
 |---------------------|---------------------------------------------------|
 | !commands           | See list of commands you can query                |
-| !career <nametag>   | See hit percentages for your total career         |
-| !last20 <nametag>   | See hit percentages from the last 20 games played |
-| !lastgame <nametag> | See hit percentages from the last game played     |
+| !career \<nametag>   | See hit percentages for your total career         |
+| !last20 \<nametag>   | See hit percentages from the last 20 games played |
+| !lastgame \<nametag> | See hit percentages from the last game played     |
 
 ## References
 
