@@ -8,14 +8,15 @@ import (
 	"bytes"
 	"fmt"
 	"math"
-	"github.com/dariubs/percent"
 	"os"
 	"time"
 	"flag"
 	"os/signal"
 	"syscall"
-	"github.com/bwmarrin/discordgo"
 	"strings"
+	"github.com/bwmarrin/discordgo"
+	"github.com/dariubs/percent"
+	"./structures"
 )
 
 // Variables used for command line parameters
@@ -24,7 +25,6 @@ var (
 )
 
 func init() {
-
 	flag.StringVar(&Token, "t", "", "Bot Token")
 	flag.Parse()
 }
@@ -42,56 +42,68 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.Contains(m.Content, "!career") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			generateCareerStats(nametag)
-			// s.ChannelMessageSend(m.ChannelID, "Pong!")
+			var json []byte = retrieveBlitzData(nametag)
+			var playerStats ValorantStats = parseValorantData(nametag, json)
+		
+			var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
+		
+			var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
+			content := generateDiscordEmbedContent(nametag, playerStats, careerHitRateData, "career")
+
+			embed := structures.NewEmbed().
+				SetTitle("Career Statistics").
+				AddField(nametag, content).
+				SetColor(16582407).MessageEmbed
+				
+			s.ChannelMessageSendEmbed(m.ChannelID, embed)
+
+			fmt.Printf("%f", careerHitRateData)
 		}
 
 	} else if  strings.Contains(m.Content, "!last20") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			generateLast20Stats(nametag)
-			// s.ChannelMessageSend(m.ChannelID, "Pong!")
+			var json []byte = retrieveBlitzData(nametag)
+			var playerStats ValorantStats = parseValorantData(nametag, json)
+		
+			var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
+		
+			var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
+			content := generateDiscordEmbedContent(nametag, playerStats, lastTwentyHitRateData, "last20")
+
+			embed := structures.NewEmbed().
+				SetTitle("Last 20 Games Statistics").
+				AddField(nametag, content).
+				SetColor(16582407).MessageEmbed
+			
+			s.ChannelMessageSendEmbed(m.ChannelID, embed)
+
+			fmt.Printf("%f", lastTwentyHitRateData)
+			
 		}
 	} else if  strings.Contains(m.Content, "!lastgame") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			generateLastGameStats(nametag)
-			// s.ChannelMessageSend(m.ChannelID, "Pong!")
+			var json []byte = retrieveBlitzData(nametag)
+			var playerStats ValorantStats = parseValorantData(nametag, json)
+		
+			matches := retrieveMatches(playerStats.Id)
+			matchStats := retrieveMatchStats(playerStats, matches)
+		
+			embed := structures.NewEmbed().
+			SetTitle("Last Game Statistics").
+			AddField("Match 1", matchStats).
+			// SetImage(mapImage).
+			   SetColor(16582407).MessageEmbed
+			
+			// embed := generateLastGameStatsEmbed(nametag)
+			s.ChannelMessageSendEmbed(m.ChannelID, embed)
 		}
 	} else if m.Content == "!commands" {
 		s.ChannelMessageSend(m.ChannelID, "Commands are\n!career <nametag>\n!last20 <nametag>\n!lastgame <nametag\n")
 	}
 }
 
-func generateCareerStats(nametag string) {
-	var json []byte = retrieveBlitzData(nametag)
-	var playerStats ValorantStats = parseValorantData(nametag, json)
-
-	var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
-
-	var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
-	postStatsToDiscord(nametag, playerStats, careerHitRateData, "career")
-	fmt.Printf("%f", careerHitRateData)
-}
-
-func generateLast20Stats(nametag string) {
-	var json []byte = retrieveBlitzData(nametag)
-	var playerStats ValorantStats = parseValorantData(nametag, json)
-
-	var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
-
-	var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
-	postStatsToDiscord(nametag, playerStats, lastTwentyHitRateData, "last20")
-	fmt.Printf("%f", lastTwentyHitRateData)
-}
-
-func generateLastGameStats(nametag string) {
-	var json []byte = retrieveBlitzData(nametag)
-	var playerStats ValorantStats = parseValorantData(nametag, json)
-
-	matches := retrieveMatches(playerStats.Id)
-	retrieveMatchStats(playerStats, matches)
-}
 
 type HitPercentages struct {
 	HeadShotPercentage float64
@@ -256,12 +268,10 @@ func retrieveMatches(playerID string) []string {
 
 }
 
-func retrieveMatchStats(player ValorantStats, matches []string) {
+func retrieveMatchStats(player ValorantStats, matches []string) string {
 	var matchDamageStatistics = make(map[string]*DamageStats)
-	// fmt.Println(matches)
 	
 	matchEndpoint := fmt.Sprintf("https://valorant.iesdev.com/match/%s", matches[0])
-	// fmt.Printf("match 0 is %s\n",matches[:1])
 	resp, err := http.Get(matchEndpoint)
 	if err != nil {
 		log.Fatalln(err)
@@ -310,62 +320,11 @@ func retrieveMatchStats(player ValorantStats, matches []string) {
 		matchDamageStatistics[matchHistory.ID].Damage)
 	fmt.Println(matchStats)
 
-	type Field struct {
-		Name  string `json:"name"`
-		Value string `json:"value"`
-	}
-	type Thumbnail struct {
-		URL string `json:"url"`
-	}
-	type Embed struct {
-		Title  string  		`json:"title"`
-		Color  int     		`json:"color"`
-		Fields []Field 		`json:"fields"`
-		Thumbnail Thumbnail `json:"thumbnail"`
-	}
-	type DiscordMessage struct {
-		Embeds []Embed `json:"embeds"`
-	}	
+	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
-	var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
+	return matchStats
 
-	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
-	discordMessage := DiscordMessage{
-		Embeds: []Embed{
-			Embed{
-				Title: "Last Game Statistics",
-				Color: 16582407,
-				Fields: []Field{
-					Field{
-						Name: "Match 1",
-						Value: matchStats,
-					},
-				},
-				Thumbnail: Thumbnail{
-					URL: mapImage,
-				},
-			},
-		},
-		
-	}
 
-	fmt.Println(discordMessage)
-
-	bytesRepresentation, err := json.Marshal(discordMessage)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	respWebhook, err := http.Post(discordWebhook, "application/json", bytes.NewBuffer(bytesRepresentation))
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	var result map[string]interface{}
-	json.NewDecoder(respWebhook.Body).Decode(&result)
-
-	log.Println(result)
-	log.Println(result["data"])
 }
 
 
@@ -411,7 +370,7 @@ func postError(nametag string) {
 	log.Println(result["data"])
 }
 
-func postStatsToDiscord(nametag string, stats ValorantStats, hitRate HitPercentages, matchStatisticType string) {
+func generateDiscordEmbedContent(nametag string, stats ValorantStats, hitRate HitPercentages, matchStatisticType string) string {
 	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
 	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
 	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
@@ -423,53 +382,5 @@ func postStatsToDiscord(nametag string, stats ValorantStats, hitRate HitPercenta
 		default: content = fmt.Sprintf("Something went wrong choosing the statistic type when posting to Discord")
 	}
 
-	// generated from https://mholt.github.io/json-to-go/
-
-	type Field struct {
-		Name  string `json:"name"`
-		Value string `json:"value"`
-	}
-	type Embed struct {
-		Title  string  `json:"title"`
-		Color  int     `json:"color"`
-		Fields []Field `json:"fields"`
-	}
-	type DiscordMessage struct {
-		Embeds []Embed `json:"embeds"`
-	}	
-
-
-	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
-	discordMessage := DiscordMessage{
-		Embeds: []Embed{
-			Embed{
-				Title: "Valorant Statistics",
-				Color: 16582407,
-				Fields: []Field{
-					Field{
-						Name: "Career Statistics",
-						Value: content,
-					},
-				},
-			},
-		},
-	}
-
-	fmt.Println(discordMessage)
-
-	bytesRepresentation, err := json.Marshal(discordMessage)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	resp, err := http.Post(discordWebhook, "application/json", bytes.NewBuffer(bytesRepresentation))
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	var result map[string]interface{}
-	json.NewDecoder(resp.Body).Decode(&result)
-
-	log.Println(result)
-	log.Println(result["data"])
+	return content
 }
