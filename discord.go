@@ -179,7 +179,6 @@ type MatchHistoryOffset struct {
 	Offset string
 }
 
-
 func main() {
 	
 	// Create a new Discord session using the provided bot token.
@@ -323,8 +322,6 @@ func retrieveMatchStats(player ValorantStats, matches []string) string {
 	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
 	return matchStats
-
-
 }
 
 
