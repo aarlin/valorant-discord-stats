@@ -1,4 +1,4 @@
-module valorant-discord-stats
+module github.com/aarlin/valorant-discord-stats
 
 go 1.14
 
