@@ -1,0 +1,8 @@
+github.com/aarlin/valorant-discord-stats v0.0.0-20200712171117-e658aaaec25d h1:3M+b+v4BJKs5QG2dMriQ7caTP+4E3dAkW49LvH0YlaY=
+github.com/bwmarrin/discordgo v0.21.1 h1:UI2PWwzvn5IFuscYcDc6QB/duhs9MUIjQ4HclcIZisc=
+github.com/bwmarrin/discordgo v0.21.1/go.mod h1:c1WtWUGN6nREDmzIpyTp/iD3VYt4Fpx+bVyfBG7JE+M=
+github.com/dariubs/percent v0.0.0-20200128140941-b7801cf1c7e2 h1:5EPE4Uk7ucthLTJAZqZxu6LZluox5/AqXUxJDpzgJjg=
+github.com/dariubs/percent v0.0.0-20200128140941-b7801cf1c7e2/go.mod h1:NDZpkezJ8QqyIW/510MywB5T2KdC8v/0oTlEoPcMsRM=
+github.com/gorilla/websocket v1.4.0 h1:WDFjx/TMzVgy9VdMMQi2K2Emtwi2QcUQsztZ/zLaH/Q=
+github.com/gorilla/websocket v1.4.0/go.mod h1:E7qHFY5m1UJ88s3WnNqhKjPHQ0heANvMoAMk2YaljkQ=
+golang.org/x/crypto v0.0.0-20181030102418-4d3f4d9ffa16/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
