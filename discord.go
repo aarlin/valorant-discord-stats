@@ -16,7 +16,7 @@ import (
 	"strings"
 	"github.com/bwmarrin/discordgo"
 	"github.com/dariubs/percent"
-	"structures"
+	"github.com/aarlin/valorant-discord-stats/structures"
 )
 
 // Variables used for command line parameters
