@@ -19,13 +19,12 @@ Follow this [guide](https://www.writebots.com/discord-bot-token/) up until step 
 
 ## Install onto EC2 Instance
 
-sudo yum update  
-sudo yum install git -y  
-sudo yum install -y golang
-git clone https://github.com/aarlin/valorant-discord-stats.git  
-sudo amazon-linux-extras install docker
-sudo service docker start
-sudo usermod -a -G docker ec2-user
+`sudo yum update`  
+`sudo yum install -y git golang`
+`git clone https://github.com/aarlin/valorant-discord-stats.git`  
+`sudo amazon-linux-extras install docker`
+`sudo service docker start`
+`sudo usermod -a -G docker ec2-user`
 
 ## Build Docker Image
 
