@@ -182,7 +182,7 @@ type MatchHistoryOffset struct {
 func main() {
 	
 	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot " + Token)
+	dg, err := discordgo.New("Bot " + "Mzk2ODA3Njg4MDM5Njk0MzQ2.Xv4Nag.Hnuf3kGeSS5KrXQU4lXGYmWLfgc")
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -345,26 +345,7 @@ func roundPercentage(percentage float64) float64 {
 
 func postError(nametag string) {
 	content := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", nametag)
-	discordWebhook := "https://discordapp.com/api/webhooks/723323733728821369/amDzaBkpO80fWYPJbRejem39CSa00zRdFcF4SO5tYMtprP3V8vsT6autU3nG3ik9TOuc"
-	discordMessage := map[string]interface{} {
-		"content": content,
-	}
-	
-	bytesRepresentation, err := json.Marshal(discordMessage)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	resp, err := http.Post(discordWebhook, "application/json", bytes.NewBuffer(bytesRepresentation))
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	var result map[string]interface{}
-	json.NewDecoder(resp.Body).Decode(&result)
-
-	log.Println(result)
-	log.Println(result["data"])
+	log.Println(content)
 }
 
 func generateDiscordEmbedContent(nametag string, stats ValorantStats, hitRate HitPercentages, matchStatisticType string) string {
