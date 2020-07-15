@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
-	"bytes"
 	"fmt"
 	"math"
 	"os"
@@ -182,7 +181,7 @@ type MatchHistoryOffset struct {
 func main() {
 	
 	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot " + "Mzk2ODA3Njg4MDM5Njk0MzQ2.Xv4Nag.Hnuf3kGeSS5KrXQU4lXGYmWLfgc")
+	dg, err := discordgo.New("Bot " + "<REPLACE WITH TOKEN>")
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
