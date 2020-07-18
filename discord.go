@@ -149,6 +149,13 @@ type PlayerStat struct {
 	WasPenalized bool   `json:"wasPenalized"`
 }
 
+type Team struct {
+	Won          bool   `json:"won"`
+	TeamID       string `json:"teamId"`
+	RoundsWon    int    `json:"roundsWon"`
+	RoundsPlayed int    `json:"roundsPlayed"`
+}
+
 type RoundResult struct { 
 	RoundNum    int    `json:"roundNum"`
 	PlantSite   string `json:"plantSite"`
@@ -158,13 +165,40 @@ type RoundResult struct {
 	WinningTeam  string `json:"winningTeam"`
 }
 
+type PlayerStats struct {
+	Kills        int `json:"kills"`
+	Score        int `json:"score"`
+	Deaths       int `json:"deaths"`
+	Assists      int `json:"assists"`
+	AbilityCasts struct {
+		GrenadeCasts  int `json:"grenadeCasts"`
+		Ability1Casts int `json:"ability1Casts"`
+		Ability2Casts int `json:"ability2Casts"`
+		UltimateCasts int `json:"ultimateCasts"`
+	} `json:"abilityCasts"`
+	RoundsPlayed   int `json:"roundsPlayed"`
+	PlaytimeMillis int `json:"playtimeMillis"`
+}
+
+type Player struct {
+	Stats  					PlayerStats	`json:"stats"`
+	TeamID      			string 		`json:"teamId"`			// blue or red
+	PartyID    	 			string 		`json:"partyId"`
+	Subject     			string 		`json:"subject"`			// player id
+	CharacterID 			string 		`json:"characterId"`		// agent
+	CompetitiveTier         int 		`json:"competitiveTier"`
+	SessionPlaytimeMinutes  int 		`json:"sessionPlaytimeMinutes"`
+}
+
 type MatchHistory struct {
 	ID     		 string 	   `json:"id"`
 	Map    	     string 	   `json:"map"`
 	Mode   		 string 	   `json:"mode"`
 	Ranked 		 bool   	   `json:"ranked"`
+	Teams  		 []Team 	   `json:"teams"`
 	RoundResults []RoundResult `json:"roundResults"`
 	StartedAt 	 time.Time 	   `json:"startedAt"`
+	Players 	 []Player      `json:"players"`
 	Length    	 int       	   `json:"length"`
 	Queue        string        `json:"queue"`
 	Season    	 string        `json:"season"`
@@ -181,7 +215,7 @@ type MatchHistoryOffset struct {
 func main() {
 	
 	// Create a new Discord session using the provided bot token.
-	dg, err := discordgo.New("Bot " + "<REPLACE WITH TOKEN>")
+	dg, err := discordgo.New("Bot " + Token)
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
 		return
@@ -304,23 +338,67 @@ func retrieveMatchStats(player ValorantStats, matches []string) string {
 			}
 		}
 	}
+
+	kills := 0
+	deaths := 0
+	assists := 0
+	competitiveTier := 0
+	team := ""
+	gameRoundResults := "0 - 0"
+	fmt.Println(team)
+
+	for _, matchParticipant := range matchHistory.Players {
+		if matchParticipant.Subject == player.Id {
+			kills = matchParticipant.Stats.Kills
+			deaths = matchParticipant.Stats.Deaths
+			assists = matchParticipant.Stats.Assists
+			competitiveTier = matchParticipant.CompetitiveTier
+			team = matchParticipant.TeamID
+			fmt.Println(team)
+		}
+	}
+
+	blueTeamRoundWins := 0
+	redTeamRoundWins := 0
+
+	for _, matchParticipantTeam := range matchHistory.Teams {
+		switch matchParticipantTeam.TeamID {
+			case "Red": redTeamRoundWins = matchParticipantTeam.RoundsWon
+			case "Blue": blueTeamRoundWins = matchParticipantTeam.RoundsWon
+			default: fmt.Sprintf("Something went wrong parsing team ID from API endpoint")
+		}
+	}
+	fmt.Println(team)
+
+	switch team {
+		case "Red":	gameRoundResults = fmt.Sprintf("%d - %d", redTeamRoundWins, blueTeamRoundWins)
+		case "Blue": gameRoundResults = fmt.Sprintf("%d - %d", blueTeamRoundWins, redTeamRoundWins)
+		default: fmt.Sprintf("Something went wrong while trying to create round results")
+	}
 	
 	var matchPercentages = calculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
 	fmt.Println(matchPercentages)
 
-	var matchStats = fmt.Sprintf("Nametag: %s\nMatch ID: %s\nMap: %s\nHeadshots: %d (%.2f%%)\nBodyshots: %d (%.2f%%)\nLegshots: %d(%.2f%%)\nDamage: %d\n", 
+	var matchStats = fmt.Sprintf("Nametag: %s\nCompetitive Tier: %s\nGame Results: %s\nMatch ID: %s\nMap: %s\nHeadshots: %d (%.2f%%)\nBodyshots: %d (%.2f%%)\nLegshots: %d(%.2f%%)\nDamage: %d\nKills \\/ Deaths \\/ Assists: %d \\/ %d \\/ %d\n",
 		player.Nametag,
+		competitiveTier,
+		gameRoundResults,
 		matchHistory.ID, 
 		matchHistory.Map,
 		matchDamageStatistics[matchHistory.ID].Headshots, matchPercentages.HeadShotPercentage,
 		matchDamageStatistics[matchHistory.ID].Bodyshots, matchPercentages.BodyShotPercentage,
 		matchDamageStatistics[matchHistory.ID].Legshots, matchPercentages.LegShotPercentage,
-		matchDamageStatistics[matchHistory.ID].Damage)
+		matchDamageStatistics[matchHistory.ID].Damage,
+		kills, deaths, assists)
 	fmt.Println(matchStats)
 
 	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
 	return matchStats
+}
+
+func createCompetitiveTier(competitiveTier int) string {
+	return ""
 }
 
 
