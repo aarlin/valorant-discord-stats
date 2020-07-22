@@ -127,10 +127,22 @@ type Overall struct {
 type Stats struct {
 	Overall Overall
 }
+
+type Tier struct {
+	
+}
+
+type Ranks struct {
+	Competitive struct {
+		Tier int 
+	} `json:"competitive"`
+}
+
 type ValorantStats struct {
 	Nametag string
 	Id string
 	Stats Stats	
+	Ranks Ranks
 }
 
 type Damage struct {
@@ -339,11 +351,11 @@ func retrieveMatchStats(player ValorantStats, matches []string) string {
 		}
 	}
 
-	kills := 0
-	deaths := 0
-	assists := 0
-	competitiveTier := 0
-	team := ""
+	var kills int
+	var deaths int
+	var assists int
+	var competitiveTier int
+	var team string 
 	gameRoundResults := "0 - 0"
 	fmt.Println(team)
 
@@ -358,8 +370,8 @@ func retrieveMatchStats(player ValorantStats, matches []string) string {
 		}
 	}
 
-	blueTeamRoundWins := 0
-	redTeamRoundWins := 0
+	var blueTeamRoundWins int
+	var redTeamRoundWins int
 
 	for _, matchParticipantTeam := range matchHistory.Teams {
 		switch matchParticipantTeam.TeamID {
@@ -379,7 +391,16 @@ func retrieveMatchStats(player ValorantStats, matches []string) string {
 	var matchPercentages = calculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
 	fmt.Println(matchPercentages)
 
-	var matchStats = fmt.Sprintf("Nametag: %s\nCompetitive Tier: %s\nGame Results: %s\nMatch ID: %s\nMap: %s\nHeadshots: %d (%.2f%%)\nBodyshots: %d (%.2f%%)\nLegshots: %d(%.2f%%)\nDamage: %d\nKills \\/ Deaths \\/ Assists: %d \\/ %d \\/ %d\n",
+	var matchStats = fmt.Sprintf("Nametag: %s\n" + 
+		"Competitive Tier: %s\n" + 
+		"Game Results: %s\n" + 
+		"Match ID: %s\n" +
+		"Map: %s\n" + 
+		"Headshots: %d (%.2f%%)\n" +
+		"Bodyshots: %d (%.2f%%)\n" + 
+		"Legshots: %d (%.2f%%)\n" + 
+		"Damage: %d\n" + 
+		"K\\/D\\/A: %d\\/%d\\/%d\n",
 		player.Nametag,
 		competitiveTier,
 		gameRoundResults,
