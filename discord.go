@@ -38,6 +38,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 	if strings.Contains(m.Content, "!career") {
+		// TODO: Add K/D ratio, dmg/round, combat score, econ score, current rank
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
 			blitzData, err := retrieveBlitzData(nametag)
@@ -156,10 +157,6 @@ type Stats struct {
 	Overall Overall
 }
 
-type Tier struct {
-	
-}
-
 type Ranks struct {
 	Competitive struct {
 		Tier int 
@@ -228,6 +225,11 @@ type Player struct {
 	CharacterID 			string 		`json:"characterId"`		// agent
 	CompetitiveTier         int 		`json:"competitiveTier"`
 	SessionPlaytimeMinutes  int 		`json:"sessionPlaytimeMinutes"`
+	RoundDamage []struct {
+		Round    int    `json:"round"`
+		Damage   int    `json:"damage"`
+		Receiver string `json:"receiver"`
+	} `json:"roundDamage"`
 }
 
 type MatchHistory struct {
@@ -382,7 +384,10 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 	var deaths int
 	var assists int
 	var competitiveTier int
+	var score int
+	var roundsPlayed int
 	var team string 
+	// var roundDamage struct
 	gameRoundResults := "0 - 0"
 	fmt.Println(team)
 
@@ -392,7 +397,10 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 			deaths = matchParticipant.Stats.Deaths
 			assists = matchParticipant.Stats.Assists
 			competitiveTier = matchParticipant.CompetitiveTier
+			score = matchParticipant.Stats.Score
+			roundsPlayed = matchParticipant.Stats.RoundsPlayed
 			team = matchParticipant.TeamID
+			// roundDamage = matchParticipant.RoundDamage
 			fmt.Println(team)
 		}
 	}
@@ -427,6 +435,7 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 		"Bodyshots: %d (%.2f%%)\n" + 
 		"Legshots: %d (%.2f%%)\n" + 
 		"Damage: %d\n" + 
+		"Combat Score: %d\n" + 
 		"K\\/D\\/A: %d\\/%d\\/%d\n",
 		player.Nametag,
 		competitiveTier,
@@ -437,6 +446,7 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 		matchDamageStatistics[matchHistory.ID].Bodyshots, matchPercentages.BodyShotPercentage,
 		matchDamageStatistics[matchHistory.ID].Legshots, matchPercentages.LegShotPercentage,
 		matchDamageStatistics[matchHistory.ID].Damage,
+		(score / roundsPlayed),
 		kills, deaths, assists)
 	fmt.Println(matchStats)
 
