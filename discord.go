@@ -2,7 +2,6 @@ package main
 
 import (
 	"io/ioutil"
-	"log"
 	"net/http"
 	"encoding/json"
 	"fmt"
@@ -12,6 +11,7 @@ import (
 	"flag"
 	"os/signal"
 	"syscall"
+	"errors"
 	"strings"
 	"github.com/bwmarrin/discordgo"
 	"github.com/dariubs/percent"
@@ -37,66 +37,94 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
-	// If the message is "ping" reply with "Pong!"
 	if strings.Contains(m.Content, "!career") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			var json []byte = retrieveBlitzData(nametag)
-			var playerStats ValorantStats = parseValorantData(nametag, json)
-		
-			var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
-		
-			var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
-			content := generateDiscordEmbedContent(nametag, playerStats, careerHitRateData, "career")
-
-			embed := structures.NewEmbed().
-				SetTitle("Career Statistics").
-				AddField(nametag, content).
-				SetColor(16582407).MessageEmbed
+			blitzData, err := retrieveBlitzData(nametag)
+			if (err != nil) {
+				s.ChannelMessageSend(m.ChannelID, err.Error())
+			} else {
+				playerStats, err := parseValorantData(nametag, blitzData)
+				if (err != nil) {
+					s.ChannelMessageSend(m.ChannelID, err.Error())
+				} else {
+					var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
 				
-			s.ChannelMessageSendEmbed(m.ChannelID, embed)
-
-			fmt.Printf("%f", careerHitRateData)
+					var careerHitRateData HitPercentages = calculateHitPercentages(careerDamageStats)
+					content := generateDiscordEmbedContent(nametag, playerStats, careerHitRateData, "career")
+		
+					embed := structures.NewEmbed().
+						SetTitle("Career Statistics").
+						AddField(nametag, content).
+						SetColor(16582407).MessageEmbed
+						
+					s.ChannelMessageSendEmbed(m.ChannelID, embed)
+		
+					fmt.Printf("%f\n", careerHitRateData)
+				}
+			}
 		}
 
-	} else if  strings.Contains(m.Content, "!last20") {
+	} else if strings.Contains(m.Content, "!last20") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			var json []byte = retrieveBlitzData(nametag)
-			var playerStats ValorantStats = parseValorantData(nametag, json)
+			blitzData, err := retrieveBlitzData(nametag)
+			if (err != nil) {
+				s.ChannelMessageSend(m.ChannelID, err.Error())
+			} else {
+				playerStats, err := parseValorantData(nametag, blitzData)
+				if (err != nil) {
+					s.ChannelMessageSend(m.ChannelID, err.Error())
+				} else {
+					var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
+				
+					var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
+					content := generateDiscordEmbedContent(nametag, playerStats, lastTwentyHitRateData, "last20")
 		
-			var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
+					embed := structures.NewEmbed().
+						SetTitle("Last 20 Games Statistics").
+						AddField(nametag, content).
+						SetColor(16582407).MessageEmbed
+					
+					s.ChannelMessageSendEmbed(m.ChannelID, embed)
 		
-			var lastTwentyHitRateData HitPercentages = calculateHitPercentages(last20DamageStats)
-			content := generateDiscordEmbedContent(nametag, playerStats, lastTwentyHitRateData, "last20")
+					fmt.Printf("%f\n", lastTwentyHitRateData)
+				}
+			}
 
-			embed := structures.NewEmbed().
-				SetTitle("Last 20 Games Statistics").
-				AddField(nametag, content).
-				SetColor(16582407).MessageEmbed
-			
-			s.ChannelMessageSendEmbed(m.ChannelID, embed)
-
-			fmt.Printf("%f", lastTwentyHitRateData)
-			
 		}
-	} else if  strings.Contains(m.Content, "!lastgame") {
+	} else if strings.Contains(m.Content, "!lastgame") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			var json []byte = retrieveBlitzData(nametag)
-			var playerStats ValorantStats = parseValorantData(nametag, json)
-		
-			matches := retrieveMatches(playerStats.Id)
-			matchStats := retrieveMatchStats(playerStats, matches)
-		
-			embed := structures.NewEmbed().
-			SetTitle("Last Game Statistics").
-			AddField("Match 1", matchStats).
-			// SetImage(mapImage).
-			   SetColor(16582407).MessageEmbed
-			
-			// embed := generateLastGameStatsEmbed(nametag)
-			s.ChannelMessageSendEmbed(m.ChannelID, embed)
+			blitzData, err := retrieveBlitzData(nametag)
+			if (err != nil) {
+				s.ChannelMessageSend(m.ChannelID, err.Error())
+			} else {
+				playerStats, err := parseValorantData(nametag, blitzData)
+				if (err != nil) {
+					s.ChannelMessageSend(m.ChannelID, err.Error())
+				} else {
+					matches, err := retrieveMatches(playerStats.Id)
+					if (err != nil) {
+						s.ChannelMessageSend(m.ChannelID, err.Error())
+					} else {
+						matchStats, err := retrieveMatchStats(playerStats, matches)
+						
+						if (err != nil) {
+							s.ChannelMessageSend(m.ChannelID, err.Error())
+						} else {
+							embed := structures.NewEmbed().
+							SetTitle("Last Game Statistics").
+							AddField("Match 1", matchStats).
+							// SetImage(mapImage).
+							   SetColor(16582407).MessageEmbed
+							
+							// embed := generateLastGameStatsEmbed(nametag)
+							s.ChannelMessageSendEmbed(m.ChannelID, embed)
+						}
+					}
+				}		
+			}
 		}
 	} else if m.Content == "!commands" {
 		s.ChannelMessageSend(m.ChannelID, "Commands are\n!career <nametag>\n!last20 <nametag>\n!lastgame <nametag\n")
@@ -253,52 +281,51 @@ func main() {
 	dg.Close()
 }
 
-func retrieveBlitzData(nametag string) []byte {
+func retrieveBlitzData(nametag string) ([]byte, error) {
 	blitzEndpoint := fmt.Sprintf("https://valorant.iesdev.com/player/%s", nametag)
 	resp, err := http.Get(blitzEndpoint)
 	if err != nil {
-		log.Fatalln(err)
+		return nil, errors.New("Unable to get data from player endpoint")
 	}
 
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		return nil, errors.New("Unable to read response body")
 	}
 
-	return body
+	return body, nil
 }
 
-func parseValorantData(nametag string, blitzJson []byte) ValorantStats {
+func parseValorantData(nametag string, blitzJson []byte) (ValorantStats, error) {
 	var valorantStats ValorantStats 
 	err := json.Unmarshal(blitzJson, &valorantStats)
 	if err != nil {
-		postError(nametag)
-		log.Fatalln(err)
+		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", nametag)
+		return valorantStats, errors.New(retrieveDataErr)
 	}
-	return valorantStats
+	return valorantStats, nil
 }
 
-func retrieveMatches(playerID string) []string {
+func retrieveMatches(playerID string) ([]string, error) {
 	matchHistoryEndpoint := fmt.Sprintf("https://valorant.iesdev.com/matches/%s?offset=0&queue=", playerID)
 	resp, err := http.Get(matchHistoryEndpoint)
 	if err != nil {
-		log.Fatalln(err)
+		return nil, errors.New("Unable to get data from matches endpoint")
 	}
 
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		return nil, errors.New("Unable to read response body")
 	}
 
 	var matchHistoryOffset MatchHistoryOffset 
 	errUnmarshal := json.Unmarshal(body, &matchHistoryOffset) 
 	if errUnmarshal != nil {
-		postError(playerID)
-		log.Fatalln(errUnmarshal)
+		return nil, errors.New("Error trying to parse matches in history")
 	}
 
 	var matches []string = make([]string, 0, 10)
@@ -308,31 +335,31 @@ func retrieveMatches(playerID string) []string {
 	}
 
 	// fmt.Println(matches)
-	return matches
+	return matches, nil
 
 }
 
-func retrieveMatchStats(player ValorantStats, matches []string) string {
+func retrieveMatchStats(player ValorantStats, matches []string) (string, error) {
 	var matchDamageStatistics = make(map[string]*DamageStats)
 	
 	matchEndpoint := fmt.Sprintf("https://valorant.iesdev.com/match/%s", matches[0])
 	resp, err := http.Get(matchEndpoint)
 	if err != nil {
-		log.Fatalln(err)
+		return "", errors.New("Unable to get data from match endpoint")
 	}
 
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalln(err)
+		return "", errors.New("Unable to read response body")
 	}
 
 	var matchHistory MatchHistory 
 	errUnmarshal := json.Unmarshal(body, &matchHistory) 
 	if errUnmarshal != nil {
-		postError(player.Nametag)
-		log.Fatalln(errUnmarshal)
+		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", player.Nametag)
+		return "", errors.New(retrieveDataErr)
 	}
 
 	// make call to each match id using get request 
@@ -415,7 +442,7 @@ func retrieveMatchStats(player ValorantStats, matches []string) string {
 
 	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
-	return matchStats
+	return matchStats, nil
 }
 
 func createCompetitiveTier(competitiveTier int) string {
@@ -439,11 +466,6 @@ func calculateHitPercentages(damageStats DamageStats) HitPercentages {
 
 func roundPercentage(percentage float64) float64 {
 	return math.Round(percentage * 100) / 100
-}
-
-func postError(nametag string) {
-	content := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", nametag)
-	log.Println(content)
 }
 
 func generateDiscordEmbedContent(nametag string, stats ValorantStats, hitRate HitPercentages, matchStatisticType string) string {
