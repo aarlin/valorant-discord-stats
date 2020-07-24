@@ -387,6 +387,7 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 	var score int
 	var roundsPlayed int
 	var team string 
+	// TODO: parse round damage for dmg/round
 	// var roundDamage struct
 	gameRoundResults := "0 - 0"
 	fmt.Println(team)
@@ -400,8 +401,22 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 			score = matchParticipant.Stats.Score
 			roundsPlayed = matchParticipant.Stats.RoundsPlayed
 			team = matchParticipant.TeamID
-			// roundDamage = matchParticipant.RoundDamage
 			fmt.Println(team)
+
+			var roundDamageMap = make(map[int]int)
+			for _, round := range matchParticipant.RoundDamage {
+				fmt.Printf("round")
+				fmt.Println(round)
+				if val, ok := roundDamageMap[round.Round]; ok {
+					fmt.Printf("val")
+					fmt.Println(val)
+					// mapping is correct BUT missing rounds where player does no damage
+					roundDamageMap[round.Round] = val + round.Damage
+				} else {
+					roundDamageMap[round.Round] = round.Damage
+				}
+			}
+			fmt.Println(roundDamageMap)
 		}
 	}
 
@@ -450,12 +465,15 @@ func retrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 		kills, deaths, assists)
 	fmt.Println(matchStats)
 
+	// TODO: Add map image 
+	// TODO: Add competitive tier image
 	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
 	return matchStats, nil
 }
 
 func createCompetitiveTier(competitiveTier int) string {
+	// TODO: Create mapping for competitive tiers
 	return ""
 }
 
