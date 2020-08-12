@@ -35,7 +35,6 @@ type RoundResult struct {
 	WinningTeam  string `json:"winningTeam"`
 }
 
-
 type Player struct {
 	Stats  					PlayerStats	`json:"stats"`
 	TeamID      			string 		`json:"teamId"`			// blue or red
@@ -57,7 +56,6 @@ type DamageStats struct {
 	Legshots  int
 	Damage    int
 }
-
 
 type MatchHistoryOffset struct {
 	Count int
@@ -88,13 +86,10 @@ type Team struct {
 	RoundsPlayed int    `json:"roundsPlayed"`
 }
 
-
 type MatchStatistics struct {
 	DamageStats DamageStats
 	Matches int
 }
-
-
 
 type Damage struct {
 	Receiver  string `json:"receiver"`
