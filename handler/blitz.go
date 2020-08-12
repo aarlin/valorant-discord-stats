@@ -6,6 +6,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"encoding/json"
+	"github.com/aarlin/valorant-discord-stats/definition"
 )
 
 func RetrieveBlitzData(nametag string) ([]byte, error) {
@@ -39,7 +40,7 @@ func RetrieveMatches(playerID string) ([]string, error) {
 		return nil, errors.New("Unable to read response body")
 	}
 
-	var matchHistoryOffset MatchHistoryOffset 
+	var matchHistoryOffset definition.MatchHistoryOffset 
 	errUnmarshal := json.Unmarshal(body, &matchHistoryOffset) 
 	if errUnmarshal != nil {
 		return nil, errors.New("Error trying to parse matches in history")
@@ -56,8 +57,8 @@ func RetrieveMatches(playerID string) ([]string, error) {
 
 }
 
-func RetrieveMatchStats(player ValorantStats, matches []string) (string, error) {
-	var matchDamageStatistics = make(map[string]*DamageStats)
+func RetrieveMatchStats(player definition.ValorantStats, matches []string) (string, error) {
+	var matchDamageStatistics = make(map[string]*definition.DamageStats)
 	
 	matchEndpoint := fmt.Sprintf("https://valorant.iesdev.com/match/%s", matches[0])
 	resp, err := http.Get(matchEndpoint)
@@ -72,7 +73,7 @@ func RetrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 		return "", errors.New("Unable to read response body")
 	}
 
-	var matchHistory MatchHistory 
+	var matchHistory definition.MatchHistory 
 	errUnmarshal := json.Unmarshal(body, &matchHistory) 
 	if errUnmarshal != nil {
 		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", player.Nametag)
@@ -81,7 +82,7 @@ func RetrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 
 	// make call to each match id using get request 
 	// then do this nested for loop to grab all damage
-	matchDamageStatistics[matchHistory.ID] = &DamageStats{0, 0, 0, 0}
+	matchDamageStatistics[matchHistory.ID] = &definition.DamageStats{0, 0, 0, 0}
 	for _, roundResult := range matchHistory.RoundResults {
 		for _, playerStat := range roundResult.PlayerStats {
 			if playerStat.Subject == player.Id {
@@ -152,7 +153,7 @@ func RetrieveMatchStats(player ValorantStats, matches []string) (string, error) 
 		case "Blue": gameRoundResults = fmt.Sprintf("%d - %d", blueTeamRoundWins, redTeamRoundWins)
 		default: fmt.Sprintf("Something went wrong while trying to create round results")
 	}
-	
+
 	var matchPercentages = calculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
 	fmt.Println(matchPercentages)
 
