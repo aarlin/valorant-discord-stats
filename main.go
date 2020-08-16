@@ -9,10 +9,10 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
-
 	"github.com/aarlin/valorant-discord-stats/definition"
-	"github.com/aarlin/valorant-discord-stats/handler"
-	"github.com/aarlin/valorant-discord-stats/helper"
+	"github.com/aarlin/valorant-discord-stats/api"
+	"github.com/aarlin/valorant-discord-stats/calculation"
+	"github.com/aarlin/valorant-discord-stats/formatter"
 	"github.com/aarlin/valorant-discord-stats/structures"
 	"github.com/bwmarrin/discordgo"
 )
@@ -40,7 +40,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		// TODO: econ score, current rank
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			blitzData, err := handler.RetrieveBlitzData(nametag)
+			blitzData, err := api.RetrieveBlitzData(nametag)
 			if err != nil {
 				s.ChannelMessageSend(m.ChannelID, err.Error())
 			} else {
@@ -51,7 +51,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 					var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
 
 					var careerHitRateData definition.HitPercentages = helper.CalculateHitPercentages(careerDamageStats)
-					content := generateDiscordEmbedContent(nametag, playerStats, careerHitRateData, "career")
+					content := formatter.GenerateDiscordEmbedContent(nametag, playerStats, careerHitRateData, "career")
 
 					embed := structures.NewEmbed().
 						SetTitle("Career Statistics").
@@ -68,7 +68,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	} else if strings.Contains(m.Content, "!last20") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			blitzData, err := handler.RetrieveBlitzData(nametag)
+			blitzData, err := api.RetrieveBlitzData(nametag)
 			if err != nil {
 				s.ChannelMessageSend(m.ChannelID, err.Error())
 			} else {
@@ -79,7 +79,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 					var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
 
 					var lastTwentyHitRateData definition.HitPercentages = helper.CalculateHitPercentages(last20DamageStats)
-					content := generateDiscordEmbedContent(nametag, playerStats, lastTwentyHitRateData, "last20")
+					content := formatter.GenerateDiscordEmbedContent(nametag, playerStats, lastTwentyHitRateData, "last20")
 
 					embed := structures.NewEmbed().
 						SetTitle("Last 20 Games Statistics").
@@ -93,10 +93,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 
 		}
-	} else if strings.Contains(m.Content, "!lastgame") {
+	} else if strings.Contains(m.Content, "!lastgame") || strings.Contains(m.Content, "!lg") {
 		if len(strings.Split(m.Content, " ")) > 1 {
 			nametag := strings.Split(m.Content, " ")[1]
-			blitzData, err := handler.RetrieveBlitzData(nametag)
+			blitzData, err := api.RetrieveBlitzData(nametag)
 			if err != nil {
 				s.ChannelMessageSend(m.ChannelID, err.Error())
 			} else {
@@ -104,12 +104,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 				if err != nil {
 					s.ChannelMessageSend(m.ChannelID, err.Error())
 				} else {
-					matches, err := handler.RetrieveMatches(playerStats.Id)
+					matches, err := api.RetrieveMatches(playerStats.Id)
 					if err != nil {
 						s.ChannelMessageSend(m.ChannelID, err.Error())
 					} else {
-						matchStats, err := handler.RetrieveMatchStats(playerStats, matches)
-						matchSummary, err := handler.GenerateMatchSummary(playerStats, matchStats)
+						matchStats, err := api.RetrieveMatchStats(playerStats, matches)
+						matchSummary, err := api.GenerateMatchSummary(playerStats, matchStats)
 
 						if err != nil {
 							s.ChannelMessageSend(m.ChannelID, err.Error())
@@ -162,22 +162,4 @@ func parseValorantData(nametag string, blitzJson []byte) (definition.ValorantSta
 		return valorantStats, errors.New(retrieveDataErr)
 	}
 	return valorantStats, nil
-}
-
-func generateDiscordEmbedContent(nametag string, stats definition.ValorantStats, hitRate definition.HitPercentages, matchStatisticType string) string {
-	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
-	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
-	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
-	matchesPlayed := stats.Stats.Overall.Career.Matches
-	content := ""
-	switch matchStatisticType {
-	case "career":
-		content = fmt.Sprintf("Career Stats for %s:\nTotal number of matches: %d\n%s%s%s\n", nametag, matchesPlayed, headShots, bodyShots, legShots)
-	case "last20":
-		content = fmt.Sprintf("Last 20 Games Stats for %s:\n%s%s%s\n", nametag, headShots, bodyShots, legShots)
-	default:
-		content = fmt.Sprintf("Something went wrong choosing the statistic type when posting to Discord")
-	}
-
-	return content
 }

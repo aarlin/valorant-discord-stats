@@ -1,31 +1,21 @@
-package helper
+package formatter
 
 import (
-	"math"
-	"github.com/dariubs/percent"
 	"github.com/aarlin/valorant-discord-stats/definition"
+	"github.com/aarlin/valorant-discord-stats/calculation"
 	"fmt"
+	"errors"
 )
 
-func CalculateHitPercentages(damageStats definition.DamageStats) definition.HitPercentages {
-	headShots := damageStats.Headshots
-	bodyShots := damageStats.Bodyshots
-	legShots := damageStats.Legshots
-
-	var hitPercentages definition.HitPercentages
-	totalShots := headShots + bodyShots + legShots
-	hitPercentages.HeadShotPercentage = roundPercentage(percent.PercentOf(headShots, totalShots))
-	hitPercentages.BodyShotPercentage = roundPercentage(percent.PercentOf(bodyShots, totalShots))
-	hitPercentages.LegShotPercentage  = roundPercentage(percent.PercentOf(legShots, totalShots))
-	
-	return hitPercentages
-}
-
-func roundPercentage(percentage float64) float64 {
-	return math.Round(percentage * 100) / 100
-}
-
 func GenerateMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
+	switch matchHistory.Queue {
+		case "competitive": return generateRegularMatchSummary(player, matchHistory)
+		case "deathmatch": return generateDeathMatchSummary(player, matchHistory)
+	}
+	return "", errors.New("Unable to determine match queue type")
+}
+
+func generateHitPercentages(player definition.ValorantStats, matchHistory definition.MatchHistory) map[string]*definition.DamageStats {
 	var matchDamageStatistics = make(map[string]*definition.DamageStats)
 	// make call to each match id using get request 
 	// then do this nested for loop to grab all damage
@@ -42,7 +32,35 @@ func GenerateMatchSummary(player definition.ValorantStats, matchHistory definiti
 			}
 		}
 	}
+	return matchDamageStatistics
+}
 
+func generateGameRoundResults(playerTeam string, matchHistory definition.MatchHistory) string {
+	// TODO: parse round damage for dmg/round
+	// var roundDamage struct
+	gameRoundResults := "0 - 0"
+
+	var blueTeamRoundWins int
+	var redTeamRoundWins int
+
+	for _, matchParticipantTeam := range matchHistory.Teams {
+		switch matchParticipantTeam.TeamID {
+			case "Red": redTeamRoundWins = matchParticipantTeam.RoundsWon
+			case "Blue": blueTeamRoundWins = matchParticipantTeam.RoundsWon
+			default: fmt.Sprintf("Something went wrong parsing team ID from API endpoint")
+		}
+	}
+
+	switch playerTeam {
+		case "Red":	gameRoundResults = fmt.Sprintf("%d - %d", redTeamRoundWins, blueTeamRoundWins)
+		case "Blue": gameRoundResults = fmt.Sprintf("%d - %d", blueTeamRoundWins, redTeamRoundWins)
+		default: fmt.Sprintf("Something went wrong while trying to create round results")
+	}
+	
+	return gameRoundResults
+}
+
+func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
 	var kills int
 	var deaths int
 	var assists int
@@ -50,10 +68,7 @@ func GenerateMatchSummary(player definition.ValorantStats, matchHistory definiti
 	var score int
 	var roundsPlayed int
 	var team string 
-	// TODO: parse round damage for dmg/round
-	// var roundDamage struct
-	gameRoundResults := "0 - 0"
-	fmt.Println(team)
+	var gameRoundResults string
 
 	for _, matchParticipant := range matchHistory.Players {
 		if matchParticipant.Subject == player.Id {
@@ -83,25 +98,9 @@ func GenerateMatchSummary(player definition.ValorantStats, matchHistory definiti
 		}
 	}
 
-	var blueTeamRoundWins int
-	var redTeamRoundWins int
+	gameRoundResults = generateGameRoundResults(team, matchHistory)
 
-	for _, matchParticipantTeam := range matchHistory.Teams {
-		switch matchParticipantTeam.TeamID {
-			case "Red": redTeamRoundWins = matchParticipantTeam.RoundsWon
-			case "Blue": blueTeamRoundWins = matchParticipantTeam.RoundsWon
-			default: fmt.Sprintf("Something went wrong parsing team ID from API endpoint")
-		}
-	}
-	fmt.Println(team)
-
-	switch team {
-		case "Red":	gameRoundResults = fmt.Sprintf("%d - %d", redTeamRoundWins, blueTeamRoundWins)
-		case "Blue": gameRoundResults = fmt.Sprintf("%d - %d", blueTeamRoundWins, redTeamRoundWins)
-		default: fmt.Sprintf("Something went wrong while trying to create round results")
-	}
-
-	var matchPercentages = CalculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
+	var matchPercentages = calculation.CalculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
 	fmt.Println(matchPercentages)
 
 	var matchStats = fmt.Sprintf("Nametag: %s\n" + 
@@ -133,4 +132,27 @@ func GenerateMatchSummary(player definition.ValorantStats, matchHistory definiti
 	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
 	return matchStats, nil
+}
+
+func generateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
+
+	return "", nil
+}
+
+func GenerateDiscordEmbedContent(nametag string, stats definition.ValorantStats, hitRate definition.HitPercentages, matchStatisticType string) string {
+	headShots := fmt.Sprintf(":no_mouth: Head shot percentage: %.2f%%\n", hitRate.HeadShotPercentage)
+	bodyShots := fmt.Sprintf(":shirt: Body shot percentage: %.2f%%\n", hitRate.BodyShotPercentage)
+	legShots := fmt.Sprintf(":foot: Leg shot percentage: %.2f%%\n", hitRate.LegShotPercentage)
+	matchesPlayed := stats.Stats.Overall.Career.Matches
+	content := ""
+	switch matchStatisticType {
+	case "career":
+		content = fmt.Sprintf("Career Stats for %s:\nTotal number of matches: %d\n%s%s%s\n", nametag, matchesPlayed, headShots, bodyShots, legShots)
+	case "last20":
+		content = fmt.Sprintf("Last 20 Games Stats for %s:\n%s%s%s\n", nametag, headShots, bodyShots, legShots)
+	default:
+		content = fmt.Sprintf("Something went wrong choosing the statistic type when posting to Discord")
+	}
+
+	return content
 }

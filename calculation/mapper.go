@@ -1,4 +1,4 @@
-package helper
+package calculation
 
 func CreateCompetitiveTier(competitiveTier int) string {
 	switch competitiveTier {
