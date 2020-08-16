@@ -50,7 +50,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 				} else {
 					var careerDamageStats = playerStats.Stats.Overall.Career.DamageStats
 
-					var careerHitRateData definition.HitPercentages = helper.CalculateHitPercentages(careerDamageStats)
+					var careerHitRateData definition.HitPercentages = calculation.CalculateHitPercentages(careerDamageStats)
 					content := formatter.GenerateDiscordEmbedContent(nametag, playerStats, careerHitRateData, "career")
 
 					embed := structures.NewEmbed().
@@ -78,7 +78,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 				} else {
 					var last20DamageStats = playerStats.Stats.Overall.Last20.DamageStats
 
-					var lastTwentyHitRateData definition.HitPercentages = helper.CalculateHitPercentages(last20DamageStats)
+					var lastTwentyHitRateData definition.HitPercentages = calculation.CalculateHitPercentages(last20DamageStats)
 					content := formatter.GenerateDiscordEmbedContent(nametag, playerStats, lastTwentyHitRateData, "last20")
 
 					embed := structures.NewEmbed().
@@ -109,7 +109,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 						s.ChannelMessageSend(m.ChannelID, err.Error())
 					} else {
 						matchStats, err := api.RetrieveMatchStats(playerStats, matches)
-						matchSummary, err := api.GenerateMatchSummary(playerStats, matchStats)
+						matchSummary, err := formatter.GenerateMatchSummary(playerStats, matchStats)
 
 						if err != nil {
 							s.ChannelMessageSend(m.ChannelID, err.Error())

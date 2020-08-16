@@ -60,6 +60,10 @@ func generateGameRoundResults(playerTeam string, matchHistory definition.MatchHi
 	return gameRoundResults
 }
 
+func generateRoundDamage(player definition.ValorantStats, matchHistory definition.ValorantStats) (string, error) {
+	return "", nil
+}
+
 func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
 	var kills int
 	var deaths int
@@ -69,6 +73,7 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 	var roundsPlayed int
 	var team string 
 	var gameRoundResults string
+	var hitPercentages = make(map[string]*definition.DamageStats)
 
 	for _, matchParticipant := range matchHistory.Players {
 		if matchParticipant.Subject == player.Id {
@@ -99,8 +104,9 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 	}
 
 	gameRoundResults = generateGameRoundResults(team, matchHistory)
+	hitPercentages = generateHitPercentages(player, matchHistory)
 
-	var matchPercentages = calculation.CalculateHitPercentages(*matchDamageStatistics[matchHistory.ID])
+	var matchPercentages = calculation.CalculateHitPercentages(*hitPercentages[matchHistory.ID])
 	fmt.Println(matchPercentages)
 
 	var matchStats = fmt.Sprintf("Nametag: %s\n" + 
@@ -119,10 +125,10 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 		gameRoundResults,
 		matchHistory.ID, 
 		matchHistory.Map,
-		matchDamageStatistics[matchHistory.ID].Headshots, matchPercentages.HeadShotPercentage,
-		matchDamageStatistics[matchHistory.ID].Bodyshots, matchPercentages.BodyShotPercentage,
-		matchDamageStatistics[matchHistory.ID].Legshots, matchPercentages.LegShotPercentage,
-		matchDamageStatistics[matchHistory.ID].Damage,
+		hitPercentages[matchHistory.ID].Headshots, matchPercentages.HeadShotPercentage,
+		hitPercentages[matchHistory.ID].Bodyshots, matchPercentages.BodyShotPercentage,
+		hitPercentages[matchHistory.ID].Legshots, matchPercentages.LegShotPercentage,
+		hitPercentages[matchHistory.ID].Damage,
 		(score / roundsPlayed),
 		kills, deaths, assists)
 	fmt.Println(matchStats)
