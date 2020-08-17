@@ -56,7 +56,7 @@ func RetrieveMatches(playerID string) ([]string, error) {
 
 }
 
-func RetrieveMatchStats(player definition.ValorantStats, matches []string) (definition.MatchHistory, error) {
+func RetrieveMatchHistory(player definition.ValorantStats, matches []string) (definition.MatchHistory, error) {
 	var matchHistory definition.MatchHistory 
 
 	matchEndpoint := fmt.Sprintf("https://valorant.iesdev.com/match/%s", matches[0])
@@ -77,6 +77,8 @@ func RetrieveMatchStats(player definition.ValorantStats, matches []string) (defi
 		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", player.Nametag)
 		return matchHistory, errors.New(retrieveDataErr)
 	}
+
+	fmt.Println(matchHistory)
 
 	return matchHistory, nil
 }

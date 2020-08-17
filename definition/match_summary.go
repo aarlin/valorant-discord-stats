@@ -20,5 +20,19 @@ type RegularMatchSummary struct {
 }
 
 type DeathMatchSummary struct {
+	Placement int
+}
+
+type MatchSummary struct {
+	Kills int
+	Deaths int
+	Assists int
+	CompetitiveTier int
+	Score int
+	RoundsPlayed int
+	Team string
+	Queue string
+	RegularMatch RegularMatchSummary
+	DeathMatch DeathMatchSummary
 	
 }

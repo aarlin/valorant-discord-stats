@@ -106,14 +106,17 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 					if err != nil {
 						s.ChannelMessageSend(m.ChannelID, err.Error())
 					} else {
-						matchStats, err := api.RetrieveMatchStats(playerStats, matches)
-						matchSummary, err := formatter.GenerateMatchSummaryText(playerStats, matchStats)
+						matchHistory, err := api.RetrieveMatchHistory(playerStats, matches)
+						matchSummary, matchSummaryText := formatter.GenerateMatchSummary(playerStats, matchHistory)
+
+						fmt.Println(matchSummary)
+						// mapImageLink = formatter.GenerateMapImageLink(matchSummary.)
 
 						if err != nil {
 							s.ChannelMessageSend(m.ChannelID, err.Error())
 						} else {
 							embed := structures.NewEmbed().
-								AddField("Last Game Statistics", matchSummary).
+								AddField("Last Game Statistics", matchSummaryText).
 								// SetImage(mapImage).
 								SetColor(16582407).MessageEmbed
 

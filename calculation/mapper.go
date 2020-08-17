@@ -52,8 +52,5 @@ func CreateCompetitiveTier(competitiveTier int) string {
 		case 24:
 			return "radiant"
 	}
-	// TODO: Add rank icon https://blitz-cdn-plain.blitz.gg/blitz/val/ranks/diamond_small.svg
-	// https://blitz-cdn-plain.blitz.gg/blitz/val/ranks/gold1.svg
-	// Create rank average in match
 	return ""
 }	
