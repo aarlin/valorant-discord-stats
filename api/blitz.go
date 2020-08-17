@@ -80,3 +80,14 @@ func RetrieveMatchStats(player definition.ValorantStats, matches []string) (defi
 
 	return matchHistory, nil
 }
+
+
+func ParseValorantData(nametag string, blitzJson []byte) (definition.ValorantStats, error) {
+	var valorantStats definition.ValorantStats
+	err := json.Unmarshal(blitzJson, &valorantStats)
+	if err != nil {
+		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", nametag)
+		return valorantStats, errors.New(retrieveDataErr)
+	}
+	return valorantStats, nil
+}

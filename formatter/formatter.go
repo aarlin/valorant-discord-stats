@@ -7,15 +7,17 @@ import (
 	"errors"
 )
 
-func GenerateMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
+func GenerateMatchSummaryText(player definition.ValorantStats, matchHistory definition.MatchHistory) string {
 	switch matchHistory.Queue {
-		case "competitive": return generateRegularMatchSummary(player, matchHistory)
-		case "deathmatch": return generateDeathMatchSummary(player, matchHistory)
+		case "competitive": 
+			return generateRegularMatchSummaryText(matchSummary)
+		case "deathmatch": 
+			return generateDeathMatchSummary(player, matchHistory)
 	}
 	return "", errors.New("Unable to determine match queue type")
 }
 
-func generateHitPercentages(player definition.ValorantStats, matchHistory definition.MatchHistory) map[string]*definition.DamageStats {
+func generateHitCount(player definition.ValorantStats, matchHistory definition.MatchHistory) map[string]*definition.DamageStats {
 	var matchDamageStatistics = make(map[string]*definition.DamageStats)
 	// make call to each match id using get request 
 	// then do this nested for loop to grab all damage
@@ -60,11 +62,24 @@ func generateGameRoundResults(playerTeam string, matchHistory definition.MatchHi
 	return gameRoundResults
 }
 
-func generateRoundDamage(player definition.ValorantStats, matchHistory definition.ValorantStats) (string, error) {
-	return "", nil
+func generatePlayerDamagePerRound(player definition.ValorantStats, matchHistory definition.MatchHistory) map[int]int {
+	var playerDamagePerRound = make(map[int]int)
+	for _, matchParticipant := range matchHistory.Players {
+		if matchParticipant.Subject == player.Id {
+			for _, round := range matchParticipant.RoundDamage {
+				if val, ok := playerDamagePerRound[round.Round]; ok {
+					// mapping is correct BUT missing rounds where player does no damage
+					playerDamagePerRound[round.Round] = val + round.Damage
+				} else {
+					playerDamagePerRound[round.Round] = round.Damage
+				}
+			}
+		}
+	}
+	return playerDamagePerRound
 }
 
-func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
+func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.RegularMatchSummary {
 	var kills int
 	var deaths int
 	var assists int
@@ -73,7 +88,8 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 	var roundsPlayed int
 	var team string 
 	var gameRoundResults string
-	var hitPercentages = make(map[string]*definition.DamageStats)
+	var hitCount = make(map[string]*definition.DamageStats)
+	var playerDamagePerRound = make(map[int]int)
 
 	for _, matchParticipant := range matchHistory.Players {
 		if matchParticipant.Subject == player.Id {
@@ -84,65 +100,78 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 			score = matchParticipant.Stats.Score
 			roundsPlayed = matchParticipant.Stats.RoundsPlayed
 			team = matchParticipant.TeamID
-			fmt.Println(team)
-
-			var roundDamageMap = make(map[int]int)
-			for _, round := range matchParticipant.RoundDamage {
-				fmt.Printf("round")
-				fmt.Println(round)
-				if val, ok := roundDamageMap[round.Round]; ok {
-					fmt.Printf("val")
-					fmt.Println(val)
-					// mapping is correct BUT missing rounds where player does no damage
-					roundDamageMap[round.Round] = val + round.Damage
-				} else {
-					roundDamageMap[round.Round] = round.Damage
-				}
-			}
-			fmt.Println(roundDamageMap)
 		}
 	}
 
+	playerDamagePerRound = generatePlayerDamagePerRound(player, matchHistory)
 	gameRoundResults = generateGameRoundResults(team, matchHistory)
-	hitPercentages = generateHitPercentages(player, matchHistory)
+	hitCount = generateHitCount(player, matchHistory)
 
-	var matchPercentages = calculation.CalculateHitPercentages(*hitPercentages[matchHistory.ID])
-	fmt.Println(matchPercentages)
+	var matchPercentages = calculation.CalculateHitPercentages(*hitCount[matchHistory.ID])
+
+	var regularMatchSummary = definition.RegularMatchSummary {
+		Nametag: player.Nametag,
+		CompetitiveTier: calculation.CreateCompetitiveTier(competitiveTier),
+		GameRoundResults: gameRoundResults,
+		MatchHistoryID: matchHistory.ID,
+		MatchHistoryMap: matchHistory.Map,
+		Headshots: hitCount[matchHistory.ID].Headshots,
+		HeadShotPercentage: matchPercentages.HeadShotPercentage,
+		Bodyshots: hitCount[matchHistory.ID].Bodyshots,
+		BodyShotPercentage: matchPercentages.BodyShotPercentage,
+		Legshots: hitCount[matchHistory.ID].Legshots,
+		LegShotPercentage: matchPercentages.LegShotPercentage,
+		Damage: hitCount[matchHistory.ID].Damage,
+		CombatScore: (score / roundsPlayed),
+		Kills: kills,
+		Deaths: deaths,
+		Assists: assists,
+	}
+	
+	return regularMatchSummary
+}
+
+func generateRegularMatchSummaryText(matchSummary definition.RegularMatchSummary) string {
+	// TODO: remove map
+	// Remove rank
+	// Add those into images
+	// Turn map ID into link as a sub title
+	
+	// TODO: Add map image 
+	// TODO: Add competitive tier image
+	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
 
 	var matchStats = fmt.Sprintf("Nametag: %s\n" + 
-		"Competitive Tier: %s\n" + 
 		"Game Results: %s\n" + 
-		"Match ID: %s\n" +
-		"Map: %s\n" + 
 		"Headshots: %d (%.2f%%)\n" +
 		"Bodyshots: %d (%.2f%%)\n" + 
 		"Legshots: %d (%.2f%%)\n" + 
 		"Damage: %d\n" + 
 		"Combat Score: %d\n" + 
 		"K\\/D\\/A: %d\\/%d\\/%d\n",
-		player.Nametag,
-		competitiveTier,
-		gameRoundResults,
-		matchHistory.ID, 
-		matchHistory.Map,
-		hitPercentages[matchHistory.ID].Headshots, matchPercentages.HeadShotPercentage,
-		hitPercentages[matchHistory.ID].Bodyshots, matchPercentages.BodyShotPercentage,
-		hitPercentages[matchHistory.ID].Legshots, matchPercentages.LegShotPercentage,
-		hitPercentages[matchHistory.ID].Damage,
-		(score / roundsPlayed),
-		kills, deaths, assists)
-	fmt.Println(matchStats)
+		matchSummary.Nametag,
+		matchSummary.GameRoundResults,
+		matchSummary.Headshots, matchSummary.HeadShotPercentage,
+		matchSummary.Bodyshots, matchSummary.BodyShotPercentage,
+		matchSummary.Legshots, matchSummary.LegShotPercentage,
+		matchSummary.Damage,
+		matchSummary.CombatScore,
+		matchSummary.Kills, 
+		matchSummary.Deaths, 
+		matchSummary.Assists)
 
-	// TODO: Add map image 
-	// TODO: Add competitive tier image
-	// var mapImage = fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", matchHistory.Map)
-
-	return matchStats, nil
+	return matchStats
 }
 
-func generateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
+func generateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.DeathMatchSummary {
+	var matchSummary = definition.DeathMatchSummary {
 
-	return "", nil
+	}
+	return matchSummary
+}
+
+func generateDeathMatchSummaryText(matchSummary definition.DeathMatchSummary) string {
+	return ""
 }
 
 func GenerateDiscordEmbedContent(nametag string, stats definition.ValorantStats, hitRate definition.HitPercentages, matchStatisticType string) string {

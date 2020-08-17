@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -44,7 +42,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				s.ChannelMessageSend(m.ChannelID, err.Error())
 			} else {
-				playerStats, err := parseValorantData(nametag, blitzData)
+				playerStats, err := api.ParseValorantData(nametag, blitzData)
 				if err != nil {
 					s.ChannelMessageSend(m.ChannelID, err.Error())
 				} else {
@@ -72,7 +70,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				s.ChannelMessageSend(m.ChannelID, err.Error())
 			} else {
-				playerStats, err := parseValorantData(nametag, blitzData)
+				playerStats, err := api.ParseValorantData(nametag, blitzData)
 				if err != nil {
 					s.ChannelMessageSend(m.ChannelID, err.Error())
 				} else {
@@ -100,7 +98,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				s.ChannelMessageSend(m.ChannelID, err.Error())
 			} else {
-				playerStats, err := parseValorantData(nametag, blitzData)
+				playerStats, err := api.ParseValorantData(nametag, blitzData)
 				if err != nil {
 					s.ChannelMessageSend(m.ChannelID, err.Error())
 				} else {
@@ -109,7 +107,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 						s.ChannelMessageSend(m.ChannelID, err.Error())
 					} else {
 						matchStats, err := api.RetrieveMatchStats(playerStats, matches)
-						matchSummary, err := formatter.GenerateMatchSummary(playerStats, matchStats)
+						matchSummary, err := formatter.GenerateMatchSummaryText(playerStats, matchStats)
 
 						if err != nil {
 							s.ChannelMessageSend(m.ChannelID, err.Error())
@@ -152,14 +150,4 @@ func main() {
 	<-sc
 
 	dg.Close()
-}
-
-func parseValorantData(nametag string, blitzJson []byte) (definition.ValorantStats, error) {
-	var valorantStats definition.ValorantStats
-	err := json.Unmarshal(blitzJson, &valorantStats)
-	if err != nil {
-		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", nametag)
-		return valorantStats, errors.New(retrieveDataErr)
-	}
-	return valorantStats, nil
 }
