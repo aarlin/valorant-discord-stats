@@ -7,12 +7,12 @@ import (
 	"errors"
 )
 
-func GenerateMatchSummaryText(player definition.ValorantStats, matchHistory definition.MatchHistory) string {
+func GenerateMatchSummaryText(player definition.ValorantStats, matchHistory definition.MatchHistory) (string, error) {
 	switch matchHistory.Queue {
 		case "competitive": 
-			return generateRegularMatchSummaryText(matchSummary)
+			return generateRegularMatchSummaryText(matchSummary), nil
 		case "deathmatch": 
-			return generateDeathMatchSummary(player, matchHistory)
+			return generateDeathMatchSummaryText(matchSummary), nil
 	}
 	return "", errors.New("Unable to determine match queue type")
 }
@@ -79,7 +79,7 @@ func generatePlayerDamagePerRound(player definition.ValorantStats, matchHistory 
 	return playerDamagePerRound
 }
 
-func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.RegularMatchSummary {
+func GenerateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.RegularMatchSummary {
 	var kills int
 	var deaths int
 	var assists int
@@ -131,7 +131,7 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 	return regularMatchSummary
 }
 
-func generateRegularMatchSummaryText(matchSummary definition.RegularMatchSummary) string {
+func GenerateRegularMatchSummaryText(matchSummary definition.RegularMatchSummary) string {
 	// TODO: remove map
 	// Remove rank
 	// Add those into images
@@ -163,14 +163,14 @@ func generateRegularMatchSummaryText(matchSummary definition.RegularMatchSummary
 	return matchStats
 }
 
-func generateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.DeathMatchSummary {
+func GenerateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.DeathMatchSummary {
 	var matchSummary = definition.DeathMatchSummary {
 
 	}
 	return matchSummary
 }
 
-func generateDeathMatchSummaryText(matchSummary definition.DeathMatchSummary) string {
+func GenerateDeathMatchSummaryText(matchSummary definition.DeathMatchSummary) string {
 	return ""
 }
 
