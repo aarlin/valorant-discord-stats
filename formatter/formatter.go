@@ -48,6 +48,7 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 	// TODO: add this - dmg/round. bug with round not being added if player did no damage
 	playerDamagePerRound = generatePlayerDamagePerRound(player, matchHistory)
 	fmt.Println(playerDamagePerRound)
+	
 	gameRoundResults = generateGameRoundResults(team, matchHistory)
 	hitCount = generateHitCount(player, matchHistory)
 
@@ -57,7 +58,7 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 		Kills: kills,
 		Deaths: deaths,
 		Assists: assists,
-		Nametag: player.Nametag,
+		Name: player.Name,
 		CompetitiveTier: competitiveTier,
 		ID: matchHistory.ID,
 		Map: matchHistory.Map,
@@ -82,7 +83,8 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 func generateRegularMatchSummaryText(matchSummary definition.MatchSummary) string {
 	// TODO: fix this where im getting less info than usual
 	// competitive tier, match id, map, nametag
-	var matchStats = fmt.Sprintf("Nametag: %s\n" + 
+	var matchStats = fmt.Sprintf("Name: %s\n" + 
+	"Queue: %s\n" +
 	"Game Results: %s\n" + 
 	"Headshots: %d (%.2f%%)\n" +
 	"Bodyshots: %d (%.2f%%)\n" + 
@@ -90,7 +92,8 @@ func generateRegularMatchSummaryText(matchSummary definition.MatchSummary) strin
 	"Damage: %d\n" + 
 	"Combat Score: %d\n" + 
 	"K\\/D\\/A: %d\\/%d\\/%d\n",
-	matchSummary.Nametag,
+	matchSummary.Name,
+	matchSummary.Queue,
 	matchSummary.RegularMatch.GameRoundResults,
 	matchSummary.RegularMatch.Headshots, matchSummary.RegularMatch.HeadShotPercentage,
 	matchSummary.RegularMatch.Bodyshots, matchSummary.RegularMatch.BodyShotPercentage,
@@ -106,7 +109,7 @@ func generateRegularMatchSummaryText(matchSummary definition.MatchSummary) strin
 
 func generateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.MatchSummary{
 	var matchSummary = definition.MatchSummary{
-		Nametag: player.Nametag,
+		Name: player.Name,
 		ID: matchHistory.ID,
 		Map: matchHistory.Map,
 		Queue: matchHistory.Queue,
@@ -130,12 +133,13 @@ func generateGamePlacement() int {
 
 
 func generateDeathMatchSummaryText(matchSummary definition.MatchSummary) string {
-	var matchStats = fmt.Sprintf(
+	var matchStats = fmt.Sprintf("Name: %s\n" +
 	"Queue: %s \n" +
 	"Kills: %d \n" +
 	"Deaths: %d \n" + 
 	"Assists: %d \n" + 
 	"Placement: \n",
+	matchSummary.Name,
 	matchSummary.Queue,
 	matchSummary.Kills, 
 	matchSummary.Deaths, 
@@ -224,7 +228,7 @@ func GenerateMapImageLink(mapImage string) string{
 
 func GenerateCompetitiveTierFooter(competitiveTier int) (string, string) {
 	var rank = calculation.CreateCompetitiveTier(competitiveTier)
-	var tierImage = fmt.Sprintf("https://vignette.wikia.nocookie.net/valorant/images/2/24/TX_CompetitiveTier_Large_%d.png/revision/latest", competitiveTier)
+	var tierImage = calculation.GenerateCompetitiveTierImage(competitiveTier)
 	return rank, tierImage
 }
 

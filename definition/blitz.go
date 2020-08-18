@@ -15,7 +15,7 @@ type Ranks struct {
 }
 
 type ValorantStats struct {
-	Nametag string
+	Name string
 	Id string
 	Stats Stats	
 	Ranks Ranks

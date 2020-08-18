@@ -1,7 +1,23 @@
 package definition
 
+type MatchSummary struct {
+	Name string
+	Kills int
+	Deaths int
+	Assists int
+	CompetitiveTier int
+	Rank string
+	Score int
+	RoundsPlayed int
+	Team string
+	Queue string
+	ID string
+	Map string
+	RegularMatch RegularMatchSummary
+	DeathMatch DeathMatchSummary
+}
+
 type RegularMatchSummary struct {
-	Nametag string
 	GameRoundResults string
 	MatchHistoryID string
 	MatchHistoryMap string
@@ -17,22 +33,4 @@ type RegularMatchSummary struct {
 
 type DeathMatchSummary struct {
 	Placement int
-}
-
-type MatchSummary struct {
-	Nametag string
-	Kills int
-	Deaths int
-	Assists int
-	CompetitiveTier int
-	Rank string
-	Score int
-	RoundsPlayed int
-	Team string
-	Queue string
-	ID string
-	Map string
-	RegularMatch RegularMatchSummary
-	DeathMatch DeathMatchSummary
-	
 }

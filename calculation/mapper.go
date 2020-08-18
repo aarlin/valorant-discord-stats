@@ -1,5 +1,9 @@
 package calculation
 
+import (
+	"github.com/aarlin/valorant-discord-stats/config"
+)
+
 func CreateCompetitiveTier(competitiveTier int) string {
 	switch competitiveTier {
 		case 0:
@@ -54,3 +58,59 @@ func CreateCompetitiveTier(competitiveTier int) string {
 	}
 	return ""
 }	
+
+
+func GenerateCompetitiveTierImage(competitiveTier int) string {
+	switch competitiveTier {
+		case 0:
+			return config.UNRANKED_LINK
+		// TODO: what is up with these?
+		// case 1:
+		// case 2:
+		case 3:
+			return config.IRON_1_LINK
+		case 4:
+			return config.IRON_2_LINK
+		case 5:
+			return config.IRON_3_LINK
+		case 6:
+			return config.BRONZE_1_LINK
+		case 7:
+			return config.BRONZE_2_LINK
+		case 8:
+			return config.BRONZE_3_LINK
+		case 9:
+			return config.SILVER_1_LINK
+		case 10:
+			return config.SILVER_2_LINK
+		case 11:
+			return config.SILVER_3_LINK
+		case 12:
+			return config.GOLD_1_LINK
+		case 13:
+			return config.GOLD_2_LINK
+		case 14:
+			return config.GOLD_3_LINK
+		case 15:
+			return config.PLATINUM_1_LINK
+		case 16:
+			return config.PLATINUM_2_LINK
+		case 17:
+			return config.PLATINUM_3_LINK
+		case 18:
+			return config.DIAMOND_1_LINK
+		case 19:
+			return config.DIAMOND_2_LINK
+		case 20:
+			return config.DIAMOND_3_LINK
+		case 21:
+			return config.IMMORTAL_1_LINK
+		case 22:
+			return config.IMMORTAL_2_LINK
+		case 23:
+			return config.IMMORTAL_3_LINK
+		case 24:
+			return config.RADIANT_LINK
+	}
+	return ""
+}

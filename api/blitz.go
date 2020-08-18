@@ -74,7 +74,7 @@ func RetrieveMatchHistory(player definition.ValorantStats, matches []string) (de
 
 	errUnmarshal := json.Unmarshal(body, &matchHistory) 
 	if errUnmarshal != nil {
-		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", player.Nametag)
+		retrieveDataErr := fmt.Sprintf("Could not retrieve data for %s. Check if you linked blitz.gg with your account.", player.Name)
 		return matchHistory, errors.New(retrieveDataErr)
 	}
 
