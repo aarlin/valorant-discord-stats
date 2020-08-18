@@ -12,6 +12,7 @@ import (
 	"github.com/aarlin/valorant-discord-stats/calculation"
 	"github.com/aarlin/valorant-discord-stats/formatter"
 	"github.com/aarlin/valorant-discord-stats/structures"
+	"github.com/aarlin/valorant-discord-stats/config"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -109,18 +110,18 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 						matchHistory, err := api.RetrieveMatchHistory(playerStats, matches)
 						matchSummary, matchSummaryText := formatter.GenerateMatchSummary(playerStats, matchHistory)
 
-						fmt.Println(matchSummary)
-						// mapImageLink = formatter.GenerateMapImageLink(matchSummary.)
 
 						if err != nil {
 							s.ChannelMessageSend(m.ChannelID, err.Error())
 						} else {
 							embed := structures.NewEmbed().
-								AddField("Last Game Statistics", matchSummaryText).
-								// SetImage(mapImage).
-								SetColor(16582407).MessageEmbed
-
-							// embed := generateLastGameStatsEmbed(nametag)
+								SetTitle("Last Game Statistics").
+								SetURL(formatter.GenerateMatchLink(nametag, matchSummary.ID)).
+								SetThumbnail(formatter.GenerateMapImageLink(matchSummary.Map)).
+								SetFooter(formatter.GenerateCompetitiveTierFooter(matchSummary.CompetitiveTier)).
+								SetColor(config.EMBED_COLOR).
+								AddField(matchSummary.ID, matchSummaryText).MessageEmbed
+						
 							s.ChannelMessageSendEmbed(m.ChannelID, embed)
 						}
 					}

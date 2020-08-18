@@ -2,7 +2,6 @@ package definition
 
 type RegularMatchSummary struct {
 	Nametag string
-	CompetitiveTier string
 	GameRoundResults string
 	MatchHistoryID string
 	MatchHistoryMap string
@@ -14,9 +13,6 @@ type RegularMatchSummary struct {
 	LegShotPercentage float64
 	Damage int
 	CombatScore int
-	Kills int
-	Deaths int
-	Assists int
 }
 
 type DeathMatchSummary struct {
@@ -24,14 +20,18 @@ type DeathMatchSummary struct {
 }
 
 type MatchSummary struct {
+	Nametag string
 	Kills int
 	Deaths int
 	Assists int
 	CompetitiveTier int
+	Rank string
 	Score int
 	RoundsPlayed int
 	Team string
 	Queue string
+	ID string
+	Map string
 	RegularMatch RegularMatchSummary
 	DeathMatch DeathMatchSummary
 	

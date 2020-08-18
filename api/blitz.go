@@ -78,8 +78,6 @@ func RetrieveMatchHistory(player definition.ValorantStats, matches []string) (de
 		return matchHistory, errors.New(retrieveDataErr)
 	}
 
-	fmt.Println(matchHistory)
-
 	return matchHistory, nil
 }
 

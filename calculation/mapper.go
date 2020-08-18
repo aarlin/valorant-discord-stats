@@ -3,54 +3,54 @@ package calculation
 func CreateCompetitiveTier(competitiveTier int) string {
 	switch competitiveTier {
 		case 0:
-			return "unranked"
+			return "Unranked"
 		// TODO: what is up with these?
 		// case 1:
 		// case 2:
 		case 3:
-			return "iron1"
+			return "Iron 1"
 		case 4:
-			return "iron2"
+			return "Iron 2"
 		case 5:
-			return "iron3"
+			return "Iron 3"
 		case 6:
-			return "bronze1"
+			return "Bronze 1"
 		case 7:
-			return "bronze2"
+			return "Bronze 2"
 		case 8:
-			return "bronze3"
+			return "Bronze 3"
 		case 9:
-			return "silver1"
+			return "Silver 1"
 		case 10:
-			return "silver2"
+			return "Silver 2"
 		case 11:
-			return "silver3"
+			return "Silver 3"
 		case 12:
-			return "gold1"
+			return "Gold 1"
 		case 13:
-			return "gold2"
+			return "Gold 2"
 		case 14:
-			return "gold3"
+			return "Gold 3"
 		case 15:
-			return "platinum1"
+			return "Platinum 1"
 		case 16:
-			return "platinum2"
+			return "Platinum 2"
 		case 17:
-			return "platinum3"
+			return "Platinum 3"
 		case 18:
-			return "diamond1"
+			return "Diamond 1"
 		case 19:
-			return "diamond2"
+			return "Diamond 2"
 		case 20:
-			return "diamond3"
+			return "Diamond 3"
 		case 21:
-			return "immortal1"
+			return "Immortal 1"
 		case 22:
-			return "immortal2"
+			return "Immortal 2"
 		case 23:
-			return "immortal3"
+			return "Immortal 3"
 		case 24:
-			return "radiant"
+			return "Radiant"
 	}
 	return ""
 }	

@@ -7,26 +7,21 @@ import (
 )
 
 func GenerateMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (definition.MatchSummary, string) {
-	var matchSummary = definition.MatchSummary{}
-	fmt.Println(matchHistory.Queue)
 	switch matchHistory.Queue {
 		case "unrated":
 			fallthrough
 		case "competitive":
 			var competitiveMatchSummary = generateRegularMatchSummary(player, matchHistory)
-			// competitiveMatchSummary.Queue = matchHistory.Queue
-			matchSummary.RegularMatch = competitiveMatchSummary
-			return matchSummary, generateRegularMatchSummaryText(competitiveMatchSummary)
+			return competitiveMatchSummary, generateRegularMatchSummaryText(competitiveMatchSummary)
 		case "deathmatch": 
 			var deathMatchSummary = generateDeathMatchSummary(player, matchHistory)
-			deathMatchSummary.Queue = matchHistory.Queue
 			return deathMatchSummary, generateDeathMatchSummaryText(deathMatchSummary)
 		default:
-			return matchSummary, ""
+			return definition.MatchSummary{}, ""
 	}
 }
 
-func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.RegularMatchSummary {
+func generateRegularMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.MatchSummary {
 	var kills int
 	var deaths int
 	var assists int
@@ -58,55 +53,64 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 
 	var matchPercentages = calculation.CalculateHitPercentages(*hitCount[matchHistory.ID])
 
-	var regularMatchSummary = definition.RegularMatchSummary {
-		Nametag: player.Nametag,
-		CompetitiveTier: calculation.CreateCompetitiveTier(competitiveTier),
-		GameRoundResults: gameRoundResults,
-		MatchHistoryID: matchHistory.ID,
-		MatchHistoryMap: matchHistory.Map,
-		Headshots: hitCount[matchHistory.ID].Headshots,
-		HeadShotPercentage: matchPercentages.HeadShotPercentage,
-		Bodyshots: hitCount[matchHistory.ID].Bodyshots,
-		BodyShotPercentage: matchPercentages.BodyShotPercentage,
-		Legshots: hitCount[matchHistory.ID].Legshots,
-		LegShotPercentage: matchPercentages.LegShotPercentage,
-		Damage: hitCount[matchHistory.ID].Damage,
-		CombatScore: (score / roundsPlayed),
+	var regularMatchSummary = definition.MatchSummary {
 		Kills: kills,
 		Deaths: deaths,
 		Assists: assists,
+		Nametag: player.Nametag,
+		CompetitiveTier: competitiveTier,
+		ID: matchHistory.ID,
+		Map: matchHistory.Map,
+		Queue: matchHistory.Queue,
+		Rank: calculation.CreateCompetitiveTier(competitiveTier),
+		RegularMatch: definition.RegularMatchSummary {
+			GameRoundResults: gameRoundResults,
+			Headshots: hitCount[matchHistory.ID].Headshots,
+			HeadShotPercentage: matchPercentages.HeadShotPercentage,
+			Bodyshots: hitCount[matchHistory.ID].Bodyshots,
+			BodyShotPercentage: matchPercentages.BodyShotPercentage,
+			Legshots: hitCount[matchHistory.ID].Legshots,
+			LegShotPercentage: matchPercentages.LegShotPercentage,
+			Damage: hitCount[matchHistory.ID].Damage,
+			CombatScore: (score / roundsPlayed),
+		},
 	}
 	
 	return regularMatchSummary
 }
 
-func generateRegularMatchSummaryText(matchSummary definition.RegularMatchSummary) string {
+func generateRegularMatchSummaryText(matchSummary definition.MatchSummary) string {
 	// TODO: fix this where im getting less info than usual
 	// competitive tier, match id, map, nametag
 	var matchStats = fmt.Sprintf("Nametag: %s\n" + 
-		"Game Results: %s\n" + 
-		"Headshots: %d (%.2f%%)\n" +
-		"Bodyshots: %d (%.2f%%)\n" + 
-		"Legshots: %d (%.2f%%)\n" + 
-		"Damage: %d\n" + 
-		"Combat Score: %d\n" + 
-		"K\\/D\\/A: %d\\/%d\\/%d\n",
-		matchSummary.Nametag,
-		matchSummary.GameRoundResults,
-		matchSummary.Headshots, matchSummary.HeadShotPercentage,
-		matchSummary.Bodyshots, matchSummary.BodyShotPercentage,
-		matchSummary.Legshots, matchSummary.LegShotPercentage,
-		matchSummary.Damage,
-		matchSummary.CombatScore,
-		matchSummary.Kills, 
-		matchSummary.Deaths, 
-		matchSummary.Assists)
+	"Game Results: %s\n" + 
+	"Headshots: %d (%.2f%%)\n" +
+	"Bodyshots: %d (%.2f%%)\n" + 
+	"Legshots: %d (%.2f%%)\n" + 
+	"Damage: %d\n" + 
+	"Combat Score: %d\n" + 
+	"K\\/D\\/A: %d\\/%d\\/%d\n",
+	matchSummary.Nametag,
+	matchSummary.RegularMatch.GameRoundResults,
+	matchSummary.RegularMatch.Headshots, matchSummary.RegularMatch.HeadShotPercentage,
+	matchSummary.RegularMatch.Bodyshots, matchSummary.RegularMatch.BodyShotPercentage,
+	matchSummary.RegularMatch.Legshots, matchSummary.RegularMatch.LegShotPercentage,
+	matchSummary.RegularMatch.Damage,
+	matchSummary.RegularMatch.CombatScore,
+	matchSummary.Kills, 
+	matchSummary.Deaths, 
+	matchSummary.Assists)
 
 	return matchStats
 }
 
 func generateDeathMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) definition.MatchSummary{
-	var matchSummary = definition.MatchSummary{}
+	var matchSummary = definition.MatchSummary{
+		Nametag: player.Nametag,
+		ID: matchHistory.ID,
+		Map: matchHistory.Map,
+		Queue: matchHistory.Queue,
+	}
 
 	for _, matchParticipant := range matchHistory.Players {
 		if matchParticipant.Subject == player.Id {
@@ -203,6 +207,10 @@ func generateHitCount(player definition.ValorantStats, matchHistory definition.M
 	return matchDamageStatistics
 }
 
+func GenerateMatchLink(nametag string, matchID string) string {
+	return fmt.Sprintf("https://blitz.gg/valorant/match/%s/%s", nametag, matchID)
+}
+
 func GenerateMapImageLink(mapImage string) string{
 		// TODO: remove map
 	// Remove rank
@@ -214,12 +222,10 @@ func GenerateMapImageLink(mapImage string) string{
 	return fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", mapImage)
 }
 
-func GenerateCompetitiveTierLink(competitiveTier int) string {
-		// TODO: Add rank icon https://blitz-cdn-plain.blitz.gg/blitz/val/ranks/diamond_small.svg
-	// https://blitz-cdn-plain.blitz.gg/blitz/val/ranks/gold1.svg
-	// Create rank average in match
+func GenerateCompetitiveTierFooter(competitiveTier int) (string, string) {
 	var rank = calculation.CreateCompetitiveTier(competitiveTier)
-	return fmt.Sprintf("https://blitz-cdn-plain.blitz.gg/blitz/val/ranks/%s.svg", rank)
+	var tierImage = fmt.Sprintf("https://vignette.wikia.nocookie.net/valorant/images/2/24/TX_CompetitiveTier_Large_%d.png/revision/latest", competitiveTier)
+	return rank, tierImage
 }
 
 func GenerateDiscordEmbedContent(nametag string, stats definition.ValorantStats, hitRate definition.HitPercentages, matchStatisticType string) string {
