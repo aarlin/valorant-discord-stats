@@ -13,7 +13,7 @@ Go implementation to post Valorant stats onto Discord
 
 ## Start Discord Bot
 
-Run `go run discord.go -t <token>` to start the Discord bot
+Run `go run main.go -t <token>` to start the Discord bot
 
 Follow this [guide](https://www.writebots.com/discord-bot-token/) up until step 4 to get the token needed to run the bot 
 
