@@ -11,6 +11,19 @@ Go implementation to post Valorant stats onto Discord
 * Take note of your nametag from blitz.gg
   * Example: https://blitz.gg/valorant/profile/fompei-na1 -> fompei-na1 is the nametag
 
+## Commands
+
+| Command             | Description                                       |
+|---------------------|---------------------------------------------------|
+| !commands           | See list of commands you can query                |
+| !career \<nametag>   | See hit percentages for your total career         |
+| !last20 \<nametag>   | See hit percentages from the last 20 games played |
+| !lastgame \<nametag> | See hit percentages from the last game played     |
+
+## Images
+
+![Discord Message Example](./assets/discord-message.png)
+
 ## Start Discord Bot
 
 Run `go run main.go -t <token>` to start the Discord bot
@@ -32,15 +45,6 @@ Follow this [guide](https://www.writebots.com/discord-bot-token/) up until step 
 2. Run `docker images` and locate the Image ID for valorant-discord-stats  
 3. Run `docker run -it <Image ID>` OR `docker run -d <Image ID>`  
 4. Use `docker ps` for currently running processes  
-
-## Commands
-
-| Command             | Description                                       |
-|---------------------|---------------------------------------------------|
-| !commands           | See list of commands you can query                |
-| !career \<nametag>   | See hit percentages for your total career         |
-| !last20 \<nametag>   | See hit percentages from the last 20 games played |
-| !lastgame \<nametag> | See hit percentages from the last game played     |
 
 ## References
 
