@@ -4,6 +4,7 @@ import (
 	"github.com/aarlin/valorant-discord-stats/definition"
 	"github.com/aarlin/valorant-discord-stats/calculation"
 	"fmt"
+	"sort"
 )
 
 func GenerateMatchSummary(player definition.ValorantStats, matchHistory definition.MatchHistory) (definition.MatchSummary, string) {
@@ -81,8 +82,6 @@ func generateRegularMatchSummary(player definition.ValorantStats, matchHistory d
 }
 
 func generateRegularMatchSummaryText(matchSummary definition.MatchSummary) string {
-	// TODO: fix this where im getting less info than usual
-	// competitive tier, match id, map, nametag
 	var matchStats = fmt.Sprintf("Name: %s\n" + 
 	"Queue: %s\n" +
 	"Game Results: %s\n" + 
@@ -115,20 +114,35 @@ func generateDeathMatchSummary(player definition.ValorantStats, matchHistory def
 		Queue: matchHistory.Queue,
 	}
 
+	var playerKills = make(map[string]int)
+
 	for _, matchParticipant := range matchHistory.Players {
+		playerKills[player.Id] = matchParticipant.Stats.Kills
 		if matchParticipant.Subject == player.Id {
 			matchSummary.Kills = matchParticipant.Stats.Kills
 			matchSummary.Deaths = matchParticipant.Stats.Deaths
 			matchSummary.Assists = matchParticipant.Stats.Assists
 			matchSummary.Team = matchParticipant.TeamID
-		} 
+		}  
 	}
+
+	matchSummary.DeathMatch.Placement = generateGamePlacement(player.Id, playerKills)
 	return matchSummary
 }
 
-func generateGamePlacement() int {
-	// TODO: implement logic to get placement based on kills
-	return 7
+func generateGamePlacement(playerId string, playerKills map[string]int) int {
+	keys := make([]string, 0, len(playerKills))
+	for id := range playerKills {
+		keys = append(keys, id)
+	}
+	sort.Strings(keys)
+
+	for index, key := range keys {
+		if key == playerId {
+			return index
+		}
+	}
+	return -1
 }
 
 
@@ -216,13 +230,6 @@ func GenerateMatchLink(nametag string, matchID string) string {
 }
 
 func GenerateMapImageLink(mapImage string) string{
-		// TODO: remove map
-	// Remove rank
-	// Add those into images
-	// Turn map ID into link as a sub title
-	
-	// TODO: Add map image 
-	// TODO: Add competitive tier image
 	return fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", mapImage)
 }
 
