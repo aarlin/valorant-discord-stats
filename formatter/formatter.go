@@ -117,7 +117,7 @@ func generateDeathMatchSummary(player definition.ValorantStats, matchHistory def
 	var playerKills = make(map[string]int)
 
 	for _, matchParticipant := range matchHistory.Players {
-		playerKills[player.Id] = matchParticipant.Stats.Kills
+		playerKills[matchParticipant.Subject] = matchParticipant.Stats.Kills
 		if matchParticipant.Subject == player.Id {
 			matchSummary.Kills = matchParticipant.Stats.Kills
 			matchSummary.Deaths = matchParticipant.Stats.Deaths
@@ -135,11 +135,12 @@ func generateGamePlacement(playerId string, playerKills map[string]int) int {
 	for id := range playerKills {
 		keys = append(keys, id)
 	}
+
 	sort.Strings(keys)
 
 	for index, key := range keys {
 		if key == playerId {
-			return index
+			return index + 1
 		}
 	}
 	return -1
