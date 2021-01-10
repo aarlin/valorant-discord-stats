@@ -42,10 +42,21 @@ Log out and log back in for usermod changes to take affect
 
 ## Build Docker Image
 
+Change line `dg, err := discordgo.New("Bot " + Token)` by replacing TOKEN with Discord bot token 
+
 1. Run `docker build -t valorant-discord-stats .`  
 2. Run `docker images` and locate the Image ID for valorant-discord-stats  
 3. Run `docker run -it <Image ID>` OR `docker run -d <Image ID>`  
 4. Use `docker ps` for currently running processes  
+
+## Todos
+
+- [ ] make unique command call so there is no collision with other bots
+- [ ] create online on x number of server as status
+- [ ] add agent to last game
+- [ ] fix placement for deathmatch
+- [ ] fix token replacement issue
+- [ ] look into weapon stats
 
 ## References
 
