@@ -38,6 +38,7 @@ Follow this [guide](https://www.writebots.com/discord-bot-token/) up until step 
 `sudo amazon-linux-extras install docker`  
 `sudo service docker start`  
 `sudo usermod -a -G docker ec2-user`  
+Log out and log back in for usermod changes to take affect
 
 ## Build Docker Image
 
