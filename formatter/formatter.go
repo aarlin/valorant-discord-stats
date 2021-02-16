@@ -231,7 +231,12 @@ func GenerateMatchLink(nametag string, matchID string) string {
 }
 
 func GenerateMapImageLink(mapImage string) string{
-	return fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/map-art-%s.jpg", mapImage)
+	switch mapImage {
+	case "icebox":
+		return fmt.Sprintf("https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/%s/%s-hero-new.jpg", mapImage)
+	default:
+		return fmt.Sprintf("https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/%s/%s-hero-new.jpeg", mapImage)
+	}
 }
 
 func GenerateCompetitiveTierFooter(competitiveTier int) (string, string) {
