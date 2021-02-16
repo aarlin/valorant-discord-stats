@@ -22,7 +22,7 @@ Go implementation to post Valorant stats onto Discord
 
 ## Images
 
-![Discord Message Example](./assets/discord-message.png)
+![Discord Message Example](./assets/images/discord-message.png)
 
 ## Start Discord Bot
 
@@ -37,7 +37,7 @@ Follow this [guide](https://www.writebots.com/discord-bot-token/) up until step 
 `git clone https://github.com/aarlin/valorant-discord-stats.git`  
 `sudo amazon-linux-extras install docker`  
 `sudo service docker start`  
-`sudo usermod -a -G docker ec2-user`  
+`sudo usermod -aG docker ec2-user`  
 Log out and log back in for usermod changes to take affect
 
 ## Build Docker Image
