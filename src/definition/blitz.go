@@ -27,12 +27,12 @@ type Overall struct {
 }
 
 type RoundResult struct { 
-	RoundNum    int    	`json:"roundNum"`
-	PlantSite   string `json:"plantSite"`
-	BombPlanter string `json:"bombPlanter,omitempty"`
-	PlayerStats []PlayerStat `json:"playerStats"`
-	RoundResult  string `json:"roundResult"`
-	WinningTeam  string `json:"winningTeam"`
+	RoundNum    int    			`json:"roundNum"`
+	PlantSite   string 			`json:"plantSite"`
+	BombPlanter string 			`json:"bombPlanter,omitempty"`
+	PlayerStats []PlayerStat 	`json:"playerStats"`
+	RoundResult  string 		`json:"roundResult"`
+	WinningTeam  string 		`json:"winningTeam"`
 }
 
 type Player struct {
@@ -44,9 +44,9 @@ type Player struct {
 	CompetitiveTier         int 		`json:"competitiveTier"`
 	SessionPlaytimeMinutes  int 		`json:"sessionPlaytimeMinutes"`
 	RoundDamage []struct {
-		Round    int    `json:"round"`
-		Damage   int    `json:"damage"`
-		Receiver string `json:"receiver"`
+		Round    int    				`json:"round"`
+		Damage   int    				`json:"damage"`
+		Receiver string 				`json:"receiver"`
 	} `json:"roundDamage"`
 }
 
@@ -100,24 +100,24 @@ type Damage struct {
 }
 
 type PlayerStat struct {
-	Score  int `json:"score"`
-	Damage []Damage `json:"damage"`
-	WasAfk  bool `json:"wasAfk"`
-	Subject      string `json:"subject"`
-	WasPenalized bool   `json:"wasPenalized"`
+	Score  int 				`json:"score"`
+	Damage []Damage 		`json:"damage"`
+	WasAfk  bool		 	`json:"wasAfk"`
+	Subject      string	 	`json:"subject"`
+	WasPenalized bool		`json:"wasPenalized"`
 }
 
 type PlayerStats struct {
-	Kills        int `json:"kills"`
-	Score        int `json:"score"`
-	Deaths       int `json:"deaths"`
-	Assists      int `json:"assists"`
+	Kills        int 		`json:"kills"`
+	Score        int 		`json:"score"`
+	Deaths       int 		`json:"deaths"`
+	Assists      int 		`json:"assists"`
 	AbilityCasts struct {
-		GrenadeCasts  int `json:"grenadeCasts"`
-		Ability1Casts int `json:"ability1Casts"`
-		Ability2Casts int `json:"ability2Casts"`
-		UltimateCasts int `json:"ultimateCasts"`
+		GrenadeCasts  int 	`json:"grenadeCasts"`
+		Ability1Casts int 	`json:"ability1Casts"`
+		Ability2Casts int 	`json:"ability2Casts"`
+		UltimateCasts int 	`json:"ultimateCasts"`
 	} `json:"abilityCasts"`
-	RoundsPlayed   int `json:"roundsPlayed"`
-	PlaytimeMillis int `json:"playtimeMillis"`
+	RoundsPlayed   int 		`json:"roundsPlayed"`
+	PlaytimeMillis int 		`json:"playtimeMillis"`
 }
