@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"log"
@@ -17,16 +16,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
 )
-
-// Variables used for command line parameters
-var (
-	Token string
-)
-
-func init() {
-	flag.StringVar(&Token, "t", "", "Bot Token")
-	flag.Parse()
-}
 
 // This function will be called (due to AddHandler above) every time a new
 // message is created on any channel that the authenticated bot has access to.
