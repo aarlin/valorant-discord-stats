@@ -231,11 +231,12 @@ func GenerateMatchLink(nametag string, matchID string) string {
 }
 
 func GenerateMapImageLink(mapImage string) string{
+	fmt.Printf(mapImage)
 	switch mapImage {
-	case "icebox":
-		return fmt.Sprintf("https://blitz-cdn.blitz.gg/blitz/val/maps/%s/%s-hero-new.png", mapImage, mapImage)
+	case "port": // ICEBOX
+		return "https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/icebox/icebox-hero-new.jpg"
 	default:
-		return fmt.Sprintf("https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/%s/%s-hero-new.jpg", mapImage, mapImage)
+		return fmt.Sprintf("https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/%s/%s-hero-new.jpeg", mapImage, mapImage)
 	}
 }
 
