@@ -1,7 +1,7 @@
 package calculation
 
 import (
-	"github.com/aarlin/valorant-discord-stats/config"
+	"github.com/aarlin/valorant-discord-stats/src/config"
 )
 
 func CreateCompetitiveTier(competitiveTier int) string {

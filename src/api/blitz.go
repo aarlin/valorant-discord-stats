@@ -6,7 +6,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"encoding/json"
-	"github.com/aarlin/valorant-discord-stats/definition"
+	"github.com/aarlin/valorant-discord-stats/src/definition"
 )
 
 func RetrieveBlitzData(nametag string) ([]byte, error) {

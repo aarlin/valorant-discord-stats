@@ -1,8 +1,8 @@
 package formatter
 
 import (
-	"github.com/aarlin/valorant-discord-stats/definition"
-	"github.com/aarlin/valorant-discord-stats/calculation"
+	"github.com/aarlin/valorant-discord-stats/src/definition"
+	"github.com/aarlin/valorant-discord-stats/src/calculation"
 	"fmt"
 	"sort"
 )

@@ -3,7 +3,7 @@ package calculation
 import (
 	"math"
 	"github.com/dariubs/percent"
-	"github.com/aarlin/valorant-discord-stats/definition"
+	"github.com/aarlin/valorant-discord-stats/src/definition"
 )
 
 func CalculateHitPercentages(damageStats definition.DamageStats) definition.HitPercentages {

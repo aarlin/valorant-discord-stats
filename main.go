@@ -7,12 +7,12 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
-	"github.com/aarlin/valorant-discord-stats/definition"
-	"github.com/aarlin/valorant-discord-stats/api"
-	"github.com/aarlin/valorant-discord-stats/calculation"
-	"github.com/aarlin/valorant-discord-stats/formatter"
-	"github.com/aarlin/valorant-discord-stats/structures"
-	"github.com/aarlin/valorant-discord-stats/config"
+	"github.com/aarlin/valorant-discord-stats/src/definition"
+	"github.com/aarlin/valorant-discord-stats/src/api"
+	"github.com/aarlin/valorant-discord-stats/src/calculation"
+	"github.com/aarlin/valorant-discord-stats/src/formatter"
+	"github.com/aarlin/valorant-discord-stats/src/structures"
+	"github.com/aarlin/valorant-discord-stats/src/config"
 	"github.com/bwmarrin/discordgo"
 )
 

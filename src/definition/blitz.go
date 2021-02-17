@@ -27,7 +27,7 @@ type Overall struct {
 }
 
 type RoundResult struct { 
-	RoundNum    int    `json:"roundNum"`
+	RoundNum    int    	`json:"roundNum"`
 	PlantSite   string `json:"plantSite"`
 	BombPlanter string `json:"bombPlanter,omitempty"`
 	PlayerStats []PlayerStat `json:"playerStats"`
