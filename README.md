@@ -42,12 +42,12 @@ Log out and log back in for usermod changes to take affect
 
 ## Build Docker Image
 
-Change line `dg, err := discordgo.New("Bot " + Token)` by replacing TOKEN with Discord bot token 
 
-1. Run `docker build -t valorant-discord-stats .`  
-2. Run `docker images` and locate the Image ID for valorant-discord-stats  
-3. Run `docker run -it <Image ID>` OR `docker run -d <Image ID>`  
-4. Use `docker ps` for currently running processes  
+1. Add Discord Oauth token into .env.sample & rename .env.sample to .env
+2. Run `docker build -t valorant-discord-stats .`  
+3. Run `docker images` and locate the Image ID for valorant-discord-stats  
+4. Run `docker run -it <Image ID>` OR `docker run -d <Image ID>`  
+5. Use `docker ps` for currently running processes  
 
 ## Todos
 
