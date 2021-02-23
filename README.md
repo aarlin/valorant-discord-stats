@@ -44,9 +44,9 @@ Log out and log back in for usermod changes to take affect
 
 
 1. Add Discord Oauth token into .env.sample & rename .env.sample to .env
-2. Run `docker build -t valorant-discord-stats .`  
-3. Run `docker images` and locate the Image ID for valorant-discord-stats  
-4. Run `docker run -it <Image ID>` OR `docker run -d <Image ID>`  
+2. Run `docker build -t valorant .`  
+3. Run `docker images` and locate the Image ID for valorant
+4. Run `docker run -it valorant` OR `docker run -d valorant`  
 5. Use `docker ps` for currently running processes  
 
 ## Todos
