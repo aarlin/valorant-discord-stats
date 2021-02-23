@@ -48,6 +48,7 @@ Log out and log back in for usermod changes to take affect
 3. Run `docker images` and locate the Image ID for valorant
 4. Run `docker run -it valorant` OR `docker run -d valorant`  
 5. Use `docker ps` for currently running processes  
+6. Use `docker exec -it <container_id> /bin/bash` to go inside container
 
 ## Todos
 
