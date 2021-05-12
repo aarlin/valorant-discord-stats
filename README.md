@@ -18,7 +18,7 @@ Go implementation to post Valorant stats onto Discord
 | !commands           | See list of commands you can query                |
 | !career \<nametag>   | See hit percentages for your total career         |
 | !last20 \<nametag>   | See hit percentages from the last 20 games played |
-| !lastgame \<nametag> | See hit percentages from the last game played     |
+| !lastgame (!lg) \<nametag> | See hit percentages from the last game played     |
 
 ## Images
 

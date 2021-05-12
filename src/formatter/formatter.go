@@ -235,6 +235,8 @@ func GenerateMapImageLink(mapImage string) string{
 	switch mapImage {
 	case "port": // ICEBOX
 		return "https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/icebox/icebox-hero-new.jpg"
+	case "breeze":
+		return fmt.Sprintf("https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/%s/%s-hero-new.jpg", mapImage, mapImage)
 	default:
 		return fmt.Sprintf("https://blitz-cdn.blitz.gg/450x0/blitz/val/maps/%s/%s-hero-new.jpeg", mapImage, mapImage)
 	}
